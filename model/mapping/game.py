@@ -16,9 +16,6 @@ class Game(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "nickname": self.nickname,
-            "name": self.name,
-            "surname": self.surname,
-            "birthday": self.birthday,
-            "password": self.password
+            "creator_id": self.creator_id,
+            "nbround": self.nbround
         }

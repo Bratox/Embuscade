@@ -31,7 +31,7 @@ class PlayerDAO(DAO):
     def create(self, data: dict):
         try:
             player = Player(nickname=data.get('nickname'), name=data.get('name'), surname=data.get('surname'),
-                            birthday=data.get('birthday'), password=data.get('password'))
+                            password=data.get('password'))
             self._database_session.add(player)
             self._database_session.flush()
         except IntegrityError:
