@@ -2,6 +2,7 @@ import re
 from model.dao import game_dao
 from exceptions import Error, InvalidData
 
+
 class GameController:
 
     def __init__(self, database_engine, players, questions):
@@ -24,6 +25,7 @@ class GameController:
                 return game_data
         except Error as e:
             raise e
+
     def update_game(self,game_id,game_data):
 
         with self._database_engine.new_session as session:
@@ -36,4 +38,4 @@ class GameController:
         with self._database_engine.new_session as session:
             gameDAO = game_dao(session)
             game = gameDAO.get(game_id)
-            gameDAO.delete(game)
+            gameDAO.delete(game_id)
