@@ -32,3 +32,16 @@ class PlayerController:
         except Error as e:
             # log error
             raise e
+
+    def update_player(self, player_id, player_data):
+        with self._database_engine.new_session() as session:
+            player_dao = PlayerDAO(session)
+            player = player_dao.get(player_id)
+            player = player_dao.update(player, player_data)
+            return player
+
+    def delete_player(self, player_id):
+        with self._database_engine.new_session() as session:
+            player_dao = PlayerDAO(session)
+            player = player_dao.get(player_id)
+            player_dao.delete(player)
