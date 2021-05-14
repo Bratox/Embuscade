@@ -1,16 +1,34 @@
-# This is a sample Python script.
+import sys
 
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from controller.player_controller import PlayerController
+from model.database import DatabaseEngine
+from PySide6.QtWidgets import QApplication
 
 
-# Press the green button in the gutter to run the script.
+
+from exceptions import Error
+from model.dao.player_dao import PlayerDAO
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    database_engine = DatabaseEngine(url='sqlite:///embuscade.db')
+    database_engine.create_database()
+    admin_controller = PlayerController(database_engine)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print("Name : ")
+    prenom = input()
+
+    print("Surname : ")
+    nom = input()
+
+    print("Nickname : ")
+    pseudo = input()
+
+    print("Pass : ")
+    mdp = input()
+
+    data = {'name': prenom, 'surname': nom, 'nickname': pseudo, 'password': mdp}
+
+    test = admin_controller.create_player(data)
+
+    for t in admin_controller.list_player():
+        print(t)

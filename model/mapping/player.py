@@ -12,7 +12,7 @@ class Player(Base):
 
     nickname = Column(String(36), nullable=False)
     name = Column(String(36), nullable=False)
-    surname = Column(String(36), nullabel=False)
+    surname = Column(String(36), nullable=False)
     password = Column(String(36), nullable=False)
 
     def to_dict(self):
