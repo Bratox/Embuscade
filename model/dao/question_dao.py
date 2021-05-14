@@ -4,6 +4,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from model.mapping.question import Question
 from model.dao.dao import DAO
 
+from exceptions import Error, ResourceNotFound
+
 
 class QuestionDAO(DAO):
 
@@ -14,13 +16,13 @@ class QuestionDAO(DAO):
         try:
             return self._database_session.query(Question).filter_by(id=id).one()
         except NoResultFound:
-            raise print('Aucun resultat')
+            raise ResourceNotFound()
 
     def get_all(self):
         try:
             return self._database_session.query(Question).order_by(Question.id).all()
         except NoResultFound:
-            raise print("Aucun resultat")
+            raise ResourceNotFound()
 
     def create(self, data: dict):
         try:
@@ -28,7 +30,7 @@ class QuestionDAO(DAO):
             self._database_session.add(question)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("La question existe deja")
+            raise Error("La question existe deja")
 
         return question
 
@@ -42,7 +44,7 @@ class QuestionDAO(DAO):
             self._database_session.merge(question)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("Data may be malformed")
+            raise Error("Data may be malformed")
 
         return question
 
@@ -50,4 +52,4 @@ class QuestionDAO(DAO):
         try:
             self._database_session.delete(question)
         except SQLAlchemyError as e:
-            raise print(str(e))
+            raise Error(str(e))

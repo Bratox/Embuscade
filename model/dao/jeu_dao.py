@@ -4,6 +4,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from model.mapping.jeu import Jeu
 from model.dao.dao import DAO
 
+from exceptions import Error, ResourceNotFound
+
 
 class JeuDAO(DAO):
 
@@ -14,13 +16,13 @@ class JeuDAO(DAO):
         try:
             return self._database_session.query(Jeu).filter_by(id=id).one()
         except NoResultFound:
-            raise print('Aucun resultat')
+            raise ResourceNotFound()
 
     def get_all(self):
         try:
             return self._database_session.query(Jeu).order_by(Jeu.id).all()
         except NoResultFound:
-            raise print("Aucun resultat")
+            raise ResourceNotFound()
 
     def create(self, data: dict):
         try:
@@ -28,7 +30,7 @@ class JeuDAO(DAO):
             self._database_session.add(jeu)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("Le jeu existe deja")
+            raise Error("Le jeu existe deja")
 
         return jeu
 
@@ -42,7 +44,7 @@ class JeuDAO(DAO):
             self._database_session.merge(jeu)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("Data may be malformed")
+            raise Error("Data may be malformed")
 
         return jeu
 
@@ -50,4 +52,4 @@ class JeuDAO(DAO):
         try:
             self._database_session.delete(jeu)
         except SQLAlchemyError as e:
-            raise print(str(e))
+            raise Error(str(e))

@@ -4,6 +4,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from model.mapping.player import Player
 from model.dao.dao import DAO
 
+from exceptions import Error, ResourceNotFound
+
 
 class PlayerDAO(DAO):
 
@@ -14,19 +16,19 @@ class PlayerDAO(DAO):
         try:
             return self._database_session.query(Player).filter_by(nickname=nickname, password=password).order_by(Player.nickname).one()
         except NoResultFound:
-            raise print("Aucun resultat")
+            raise ResourceNotFound()
 
     def get(self, id):
         try:
             return self._database_session.query(Player).filter_by(id=id).order_by(Player.nickname).one()
         except NoResultFound:
-            raise print('Aucun resultat')
+            raise ResourceNotFound()
 
     def get_all(self):
         try:
             return self._database_session.query(Player).order_by(Player.nickname).all()
         except NoResultFound:
-            raise print("Aucun resultat")
+            raise ResourceNotFound()
 
     def create(self, data: dict):
         try:
@@ -35,7 +37,7 @@ class PlayerDAO(DAO):
             self._database_session.add(player)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("Le joueur existe deja")
+            raise Error("Le joueur existe deja")
 
         return player
 
@@ -51,7 +53,7 @@ class PlayerDAO(DAO):
             self._database_session.merge(player)
             self._database_session.flush()
         except IntegrityError:
-            raise ValueError("Data may be malformed")
+            raise Error("Data may be malformed")
 
         return player
 
@@ -59,4 +61,4 @@ class PlayerDAO(DAO):
         try:
             self._database_session.delete(player)
         except SQLAlchemyError as e:
-            raise print(str(e))
+            raise Error(str(e))
