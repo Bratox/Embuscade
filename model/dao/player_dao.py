@@ -1,5 +1,3 @@
-from abc import ABC
-
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
