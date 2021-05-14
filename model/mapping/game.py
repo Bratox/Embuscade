@@ -12,8 +12,6 @@ class Game(Base):
 
     creator_id = Column(String, ForeignKey('player.id'))
     nbround = Column(Integer, nullable=False)
-    
-
 
     def to_dict(self):
         return {
