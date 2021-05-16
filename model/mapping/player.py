@@ -1,7 +1,7 @@
 from model.mapping import Base
 import uuid
 
-from sqlalchemy import Column, String, UniqueConstraint, Date
+from sqlalchemy import Column, String, UniqueConstraint
 
 
 class Player(Base):
@@ -12,8 +12,7 @@ class Player(Base):
 
     nickname = Column(String(36), nullable=False)
     name = Column(String(36), nullable=False)
-    surname = Column(String(36), nullabel=False)
-    birthday = Column(Date, nullabel=False)
+    surname = Column(String(36), nullable=False)
     password = Column(String(36), nullable=False)
 
     def to_dict(self):
@@ -22,6 +21,5 @@ class Player(Base):
             "nickname": self.nickname,
             "name": self.name,
             "surname": self.surname,
-            "birthday": self.birthday,
             "password": self.password
         }
