@@ -26,7 +26,7 @@ class QuestionDAO(DAO):
 
     def create(self, data: dict):
         try:
-            question = Question(title=data.get('title'), exp=data.get('exp'))
+            question = Question(exp=data.get('exp'))
             self._database_session.add(question)
             self._database_session.flush()
         except IntegrityError:
@@ -35,8 +35,6 @@ class QuestionDAO(DAO):
         return question
 
     def update(self, question, data: dict):
-        if 'title' in data:
-            question.title = data['title']
         if 'exp' in data:
             question.exp = data['exp']
 
