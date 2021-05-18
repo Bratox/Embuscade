@@ -3,7 +3,7 @@ from model.dao import act_ver_dao
 from exceptions import Error, InvalidData
 
 
-class act_verController:
+class Act_verController:
 
     def __init__(self, database_engine):
         self._database_engine = database_engine
@@ -20,6 +20,7 @@ class act_verController:
             act_vers = act_ver_dao(session).get(act_ver_id)
             act_ver_data = [act_vers.to_dict() for act_ver in act_vers]
         return act_ver_data
+
     def create_act_ver(self,data):
 
         try:
