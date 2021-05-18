@@ -26,7 +26,7 @@ class ActVerDAO(DAO):
 
     def create(self, data: dict):
         try:
-            actver = ActVer(title=data.get('title'), exp=data.get('exp'))
+            actver = ActVer(exp=data.get('exp'))
             self._database_session.add(actver)
             self._database_session.flush()
         except IntegrityError:
@@ -35,8 +35,6 @@ class ActVerDAO(DAO):
         return actver
 
     def update(self, actver, data: dict):
-        if 'title' in data:
-            actver.title = data['title']
         if 'exp' in data:
             actver.exp = data['exp']
 

@@ -26,7 +26,7 @@ class JeuDAO(DAO):
 
     def create(self, data: dict):
         try:
-            jeu = Jeu(title=data.get('title'), exp=data.get('exp'))
+            jeu = Jeu(exp=data.get('exp'))
             self._database_session.add(jeu)
             self._database_session.flush()
         except IntegrityError:
@@ -35,8 +35,6 @@ class JeuDAO(DAO):
         return jeu
 
     def update(self, jeu, data: dict):
-        if 'title' in data:
-            jeu.title = data['title']
         if 'exp' in data:
             jeu.exp = data['exp']
 

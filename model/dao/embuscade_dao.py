@@ -26,7 +26,7 @@ class EmbuscadeDAO(DAO):
 
     def create(self, data: dict):
         try:
-            embuscade = Embuscade(title=data.get('title'), exp=data.get('exp'))
+            embuscade = Embuscade(exp=data.get('exp'))
             self._database_session.add(embuscade)
             self._database_session.flush()
         except IntegrityError:
@@ -35,8 +35,6 @@ class EmbuscadeDAO(DAO):
         return embuscade
 
     def update(self, embuscade, data: dict):
-        if 'title' in data:
-            embuscade.title = data['title']
         if 'exp' in data:
             embuscade.exp = data['exp']
 

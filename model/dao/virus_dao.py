@@ -26,7 +26,7 @@ class VirusDAO(DAO):
 
     def create(self, data: dict):
         try:
-            virus = Virus(title=data.get('title'), exp=data.get('exp'))
+            virus = Virus(exp=data.get('exp'))
             self._database_session.add(virus)
             self._database_session.flush()
         except IntegrityError:
@@ -35,8 +35,6 @@ class VirusDAO(DAO):
         return virus
 
     def update(self, virus, data: dict):
-        if 'title' in data:
-            virus.title = data['title']
         if 'exp' in data:
             virus.exp = data['exp']
 
