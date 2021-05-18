@@ -2,16 +2,27 @@ import sys
 
 from controller.player_controller import PlayerController
 from model.database import DatabaseEngine
-from PySide6.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from vue.embuscade import Ui_MainWindow as MainWindow
 
 from exceptions import Error
 
-if __name__ == '__main__':
+def run():
     database_engine = DatabaseEngine(url='sqlite:///embuscade.db')
     database_engine.create_database()
     admin_controller = PlayerController(database_engine)
 
-    print("Name : ")
+    app = QApplication(sys.argv)
+
+    MWind = QMainWindow()
+    ui = MainWindow(admin_controller, MWind)
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    run()
+
+    """print("Name : ")
     prenom = input()
 
     print("Surname : ")
@@ -28,4 +39,6 @@ if __name__ == '__main__':
     test = admin_controller.create_player(data)
 
     for t in admin_controller.list_player():
-        print(t)
+        print(t)"""
+
+
