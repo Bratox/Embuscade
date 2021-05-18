@@ -10,7 +10,6 @@ class Question(Base):
 
     id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
 
-    title = Column(String(36), nullable=False)
     exp = Column(Text, nullable=False)
 
     def to_dict(self):
