@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\mainwindow.ui'
+# Form implementation generated from reading ui file '.\embuscade.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,11 +11,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from vue.window import BasicWindow
 from controller.player_controller import PlayerController
+from model.database import DatabaseEngine
+from controller.question_controller import QuestionController
+from controller.virus_controller import VirusController
+from controller.jeu_controller import jeuController
+from controller.embuscade_controller import EmbuscadeController
+from controller.game_controller import GameController
+from controller.act_ver_controllers import Act_verController
+
 
 class Ui_MainWindow(BasicWindow):
 
-    def __init__(self, player_controller: PlayerController, Mwind):
+    def __init__(self, player_controller: PlayerController, database_engine, Mwind):
         self._player_controller = player_controller
+        self._database_engine = database_engine
 
         super().__init__()
 
@@ -32,7 +41,7 @@ class Ui_MainWindow(BasicWindow):
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
-        self.stackedWidget.setGeometry(QtCore.QRect(0, 20, 901, 531))
+        self.stackedWidget.setGeometry(QtCore.QRect(0, 10, 891, 571))
         self.stackedWidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.stackedWidget.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.stackedWidget.setAutoFillBackground(False)
@@ -50,7 +59,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.labelConnexion = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.labelConnexion.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-"color:rgb(0, 0, 0);")
+                                          "color:rgb(0, 0, 0);")
         self.labelConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.labelConnexion.setObjectName("labelConnexion")
         self.verticalLayout_8.addWidget(self.labelConnexion)
@@ -77,8 +86,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPseudoConnexion.setSizePolicy(sizePolicy)
         self.lineEditPseudoConnexion.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPseudoConnexion.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
+                                                   "\n"
+                                                   "")
         self.lineEditPseudoConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPseudoConnexion.setObjectName("lineEditPseudoConnexion")
         self.horizontalLayout_4.addWidget(self.lineEditPseudoConnexion)
@@ -100,8 +109,9 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPasswordConnexion.setSizePolicy(sizePolicy)
         self.lineEditPasswordConnexion.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPasswordConnexion.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
+                                                     "\n"
+                                                     "")
+        self.lineEditPasswordConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPasswordConnexion.setObjectName("lineEditPasswordConnexion")
         self.horizontalLayout_6.addWidget(self.lineEditPasswordConnexion)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
@@ -119,8 +129,8 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonConnexion.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonConnexion.setAutoFillBackground(False)
         self.ButtonConnexion.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                           "\n"
+                                           "")
         self.ButtonConnexion.setAutoDefault(False)
         self.ButtonConnexion.setDefault(True)
         self.ButtonConnexion.setFlat(False)
@@ -139,14 +149,19 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonInscriptionPageConnexion.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonInscriptionPageConnexion.setAutoFillBackground(False)
         self.ButtonInscriptionPageConnexion.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                                          "\n"
+                                                          "")
         self.ButtonInscriptionPageConnexion.setAutoDefault(False)
         self.ButtonInscriptionPageConnexion.setDefault(True)
         self.ButtonInscriptionPageConnexion.setFlat(False)
         self.ButtonInscriptionPageConnexion.setObjectName("ButtonInscriptionPageConnexion")
         self.horizontalLayout_3.addWidget(self.ButtonInscriptionPageConnexion)
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
+        self.labelConnexionRouge = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.labelConnexionRouge.setStyleSheet("color: rgb(255, 0, 0);")
+        self.labelConnexionRouge.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelConnexionRouge.setObjectName("labelConnexionRouge")
+        self.verticalLayout_2.addWidget(self.labelConnexionRouge)
         self.verticalLayoutWidget_8 = QtWidgets.QWidget(self.pageConnexion)
         self.verticalLayoutWidget_8.setGeometry(QtCore.QRect(0, 20, 901, 61))
         self.verticalLayoutWidget_8.setObjectName("verticalLayoutWidget_8")
@@ -155,7 +170,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.labelEmbuscadeConnexion = QtWidgets.QLabel(self.verticalLayoutWidget_8)
         self.labelEmbuscadeConnexion.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-"color:rgb(0, 0, 0);")
+                                                   "color:rgb(0, 0, 0);")
         self.labelEmbuscadeConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.labelEmbuscadeConnexion.setObjectName("labelEmbuscadeConnexion")
         self.verticalLayout_9.addWidget(self.labelEmbuscadeConnexion)
@@ -165,13 +180,13 @@ class Ui_MainWindow(BasicWindow):
         self.labelInscription = QtWidgets.QLabel(self.pageInscription)
         self.labelInscription.setGeometry(QtCore.QRect(0, 10, 901, 41))
         self.labelInscription.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-"color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);\n"
-"selection-color: rgb(255, 0, 0);")
+                                            "color: rgb(255, 255, 255);\n"
+                                            "border-color: rgb(0, 0, 0);\n"
+                                            "selection-color: rgb(255, 0, 0);")
         self.labelInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.labelInscription.setObjectName("labelInscription")
         self.verticalLayoutWidget_10 = QtWidgets.QWidget(self.pageInscription)
-        self.verticalLayoutWidget_10.setGeometry(QtCore.QRect(0, 70, 901, 385))
+        self.verticalLayoutWidget_10.setGeometry(QtCore.QRect(0, 70, 901, 399))
         self.verticalLayoutWidget_10.setObjectName("verticalLayoutWidget_10")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_10)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -180,7 +195,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.labelConnexion_2 = QtWidgets.QLabel(self.verticalLayoutWidget_10)
         self.labelConnexion_2.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-"color:rgb(0, 0, 0);")
+                                            "color:rgb(0, 0, 0);")
         self.labelConnexion_2.setAlignment(QtCore.Qt.AlignCenter)
         self.labelConnexion_2.setObjectName("labelConnexion_2")
         self.verticalLayout_11.addWidget(self.labelConnexion_2)
@@ -205,8 +220,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditNomInscription.setSizePolicy(sizePolicy)
         self.lineEditNomInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditNomInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
+                                                  "\n"
+                                                  "")
         self.lineEditNomInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditNomInscription.setObjectName("lineEditNomInscription")
         self.horizontalLayout_7.addWidget(self.lineEditNomInscription)
@@ -220,18 +235,19 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_3.addLayout(self.horizontalLayout_8)
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
-        self.lineEditPasswordConnexion_2 = QtWidgets.QLineEdit(self.verticalLayoutWidget_10)
+        self.lineEditPrenomInscription = QtWidgets.QLineEdit(self.verticalLayoutWidget_10)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEditPasswordConnexion_2.sizePolicy().hasHeightForWidth())
-        self.lineEditPasswordConnexion_2.setSizePolicy(sizePolicy)
-        self.lineEditPasswordConnexion_2.setMinimumSize(QtCore.QSize(200, 0))
-        self.lineEditPasswordConnexion_2.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
-        self.lineEditPasswordConnexion_2.setObjectName("lineEditPasswordConnexion_2")
-        self.horizontalLayout_9.addWidget(self.lineEditPasswordConnexion_2)
+        sizePolicy.setHeightForWidth(self.lineEditPrenomInscription.sizePolicy().hasHeightForWidth())
+        self.lineEditPrenomInscription.setSizePolicy(sizePolicy)
+        self.lineEditPrenomInscription.setMinimumSize(QtCore.QSize(200, 0))
+        self.lineEditPrenomInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
+                                                     "\n"
+                                                     "")
+        self.lineEditPrenomInscription.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEditPrenomInscription.setObjectName("lineEditPrenomInscription")
+        self.horizontalLayout_9.addWidget(self.lineEditPrenomInscription)
         self.verticalLayout_3.addLayout(self.horizontalLayout_9)
         self.labelPseudoConnexion_3 = QtWidgets.QLabel(self.verticalLayoutWidget_10)
         self.labelPseudoConnexion_3.setAlignment(QtCore.Qt.AlignCenter)
@@ -248,8 +264,9 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPseudoInscription.setSizePolicy(sizePolicy)
         self.lineEditPseudoInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPseudoInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
+                                                     "\n"
+                                                     "")
+        self.lineEditPseudoInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPseudoInscription.setObjectName("lineEditPseudoInscription")
         self.horizontalLayout_12.addWidget(self.lineEditPseudoInscription)
         self.verticalLayout_3.addLayout(self.horizontalLayout_12)
@@ -270,8 +287,9 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPasswordInscription.setSizePolicy(sizePolicy)
         self.lineEditPasswordInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPasswordInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-"\n"
-"")
+                                                       "\n"
+                                                       "")
+        self.lineEditPasswordInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPasswordInscription.setObjectName("lineEditPasswordInscription")
         self.horizontalLayout_14.addWidget(self.lineEditPasswordInscription)
         self.verticalLayout_3.addLayout(self.horizontalLayout_14)
@@ -289,14 +307,39 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonInscriptionPageInscription.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonInscriptionPageInscription.setAutoFillBackground(False)
         self.ButtonInscriptionPageInscription.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                                            "\n"
+                                                            "")
         self.ButtonInscriptionPageInscription.setAutoDefault(False)
         self.ButtonInscriptionPageInscription.setDefault(True)
         self.ButtonInscriptionPageInscription.setFlat(False)
         self.ButtonInscriptionPageInscription.setObjectName("ButtonInscriptionPageInscription")
         self.horizontalLayout_11.addWidget(self.ButtonInscriptionPageInscription)
         self.verticalLayout_3.addLayout(self.horizontalLayout_11)
+        self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
+        self.ButtonRetourInscription = QtWidgets.QPushButton(self.verticalLayoutWidget_10)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.ButtonRetourInscription.sizePolicy().hasHeightForWidth())
+        self.ButtonRetourInscription.setSizePolicy(sizePolicy)
+        self.ButtonRetourInscription.setMouseTracking(False)
+        self.ButtonRetourInscription.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.ButtonRetourInscription.setAutoFillBackground(False)
+        self.ButtonRetourInscription.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                   "\n"
+                                                   "")
+        self.ButtonRetourInscription.setAutoDefault(False)
+        self.ButtonRetourInscription.setDefault(True)
+        self.ButtonRetourInscription.setFlat(False)
+        self.ButtonRetourInscription.setObjectName("ButtonRetourInscription")
+        self.horizontalLayout_15.addWidget(self.ButtonRetourInscription)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_15)
+        self.labelInscriptionRouge = QtWidgets.QLabel(self.verticalLayoutWidget_10)
+        self.labelInscriptionRouge.setStyleSheet("color: rgb(255, 0, 0);")
+        self.labelInscriptionRouge.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelInscriptionRouge.setObjectName("labelInscriptionRouge")
+        self.verticalLayout_3.addWidget(self.labelInscriptionRouge)
         self.stackedWidget.addWidget(self.pageInscription)
         self.pageMenu = QtWidgets.QWidget()
         self.pageMenu.setObjectName("pageMenu")
@@ -311,8 +354,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.BoutonPartieRapide = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonPartieRapide.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                              "\n"
+                                              "")
         self.BoutonPartieRapide.setObjectName("BoutonPartieRapide")
         self.verticalLayout_5.addWidget(self.BoutonPartieRapide)
         self.verticalLayout.addLayout(self.verticalLayout_5)
@@ -321,8 +364,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.BoutonPartieCustom = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonPartieCustom.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                              "\n"
+                                              "")
         self.BoutonPartieCustom.setObjectName("BoutonPartieCustom")
         self.verticalLayout_6.addWidget(self.BoutonPartieCustom)
         self.verticalLayout.addLayout(self.verticalLayout_6)
@@ -331,8 +374,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.BoutonAPropos = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonAPropos.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
+                                         "\n"
+                                         "")
         self.BoutonAPropos.setObjectName("BoutonAPropos")
         self.verticalLayout_14.addWidget(self.BoutonAPropos)
         self.verticalLayout.addLayout(self.verticalLayout_14)
@@ -344,54 +387,13 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.labelEmbuscadeChoixJeu = QtWidgets.QLabel(self.verticalLayoutWidget_11)
         self.labelEmbuscadeChoixJeu.setStyleSheet("font: 28pt \"MS PGothic\";\n"
-"color: rgb(0, 0, 0);")
+                                                  "color: rgb(0, 0, 0);")
         self.labelEmbuscadeChoixJeu.setAlignment(QtCore.Qt.AlignCenter)
         self.labelEmbuscadeChoixJeu.setObjectName("labelEmbuscadeChoixJeu")
         self.verticalLayout_13.addWidget(self.labelEmbuscadeChoixJeu)
         self.stackedWidget.addWidget(self.pageMenu)
         self.pagePartieCustom = QtWidgets.QWidget()
         self.pagePartieCustom.setObjectName("pagePartieCustom")
-        self.formLayoutWidget = QtWidgets.QWidget(self.pagePartieCustom)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(270, 170, 391, 231))
-        self.formLayoutWidget.setObjectName("formLayoutWidget")
-        self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
-        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
-        self.formLayout.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.formLayout.setObjectName("formLayout")
-        self.labelNbRounds = QtWidgets.QLabel(self.formLayoutWidget)
-        self.labelNbRounds.setStyleSheet("")
-        self.labelNbRounds.setObjectName("labelNbRounds")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.labelNbRounds)
-        self.spinBoxNbRound = QtWidgets.QSpinBox(self.formLayoutWidget)
-        self.spinBoxNbRound.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.spinBoxNbRound.setMinimum(1)
-        self.spinBoxNbRound.setObjectName("spinBoxNbRound")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.spinBoxNbRound)
-        self.pushButtonAjouterQuestion = QtWidgets.QPushButton(self.formLayoutWidget)
-        self.pushButtonAjouterQuestion.setStyleSheet("background-color: rgb(255,133,51);\n"
-"\n"
-"")
-        self.pushButtonAjouterQuestion.setObjectName("pushButtonAjouterQuestion")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.pushButtonAjouterQuestion)
-        self.lineEditAjoutQuestion = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEditAjoutQuestion.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
-        self.lineEditAjoutQuestion.setObjectName("lineEditAjoutQuestion")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.lineEditAjoutQuestion)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.formLayout.setItem(1, QtWidgets.QFormLayout.LabelRole, spacerItem5)
-        self.label = QtWidgets.QLabel(self.formLayoutWidget)
-        self.label.setObjectName("label")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label)
-        self.comboBoxTypeQuestion = QtWidgets.QComboBox(self.formLayoutWidget)
-        self.comboBoxTypeQuestion.setMaxVisibleItems(4)
-        self.comboBoxTypeQuestion.setObjectName("comboBoxTypeQuestion")
-        self.comboBoxTypeQuestion.addItem("")
-        self.comboBoxTypeQuestion.addItem("")
-        self.comboBoxTypeQuestion.addItem("")
-        self.comboBoxTypeQuestion.addItem("")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.comboBoxTypeQuestion)
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.pagePartieCustom)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(0, 30, 901, 80))
         self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
@@ -401,10 +403,68 @@ class Ui_MainWindow(BasicWindow):
         self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label_2.setStyleSheet("font: 28pt \"MS PGothic\";\n"
-"color: rgb(0, 0, 0);")
+                                   "color: rgb(0, 0, 0);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_4.addWidget(self.label_2)
+        self.verticalLayoutWidget_14 = QtWidgets.QWidget(self.pagePartieCustom)
+        self.verticalLayoutWidget_14.setGeometry(QtCore.QRect(200, 160, 501, 151))
+        self.verticalLayoutWidget_14.setObjectName("verticalLayoutWidget_14")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_14)
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
+        self.formLayout.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
+        self.formLayout.setContentsMargins(0, -1, -1, -1)
+        self.formLayout.setObjectName("formLayout")
+        self.labelNbRounds = QtWidgets.QLabel(self.verticalLayoutWidget_14)
+        self.labelNbRounds.setStyleSheet("")
+        self.labelNbRounds.setObjectName("labelNbRounds")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.labelNbRounds)
+        self.spinBoxNbRound = QtWidgets.QSpinBox(self.verticalLayoutWidget_14)
+        self.spinBoxNbRound.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.spinBoxNbRound.setMinimum(1)
+        self.spinBoxNbRound.setObjectName("spinBoxNbRound")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.spinBoxNbRound)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.formLayout.setItem(2, QtWidgets.QFormLayout.LabelRole, spacerItem5)
+        self.label = QtWidgets.QLabel(self.verticalLayoutWidget_14)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.comboBoxTypeQuestion = QtWidgets.QComboBox(self.verticalLayoutWidget_14)
+        self.comboBoxTypeQuestion.setMaxVisibleItems(4)
+        self.comboBoxTypeQuestion.setObjectName("comboBoxTypeQuestion")
+        self.comboBoxTypeQuestion.addItem("")
+        self.comboBoxTypeQuestion.addItem("")
+        self.comboBoxTypeQuestion.addItem("")
+        self.comboBoxTypeQuestion.addItem("")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.comboBoxTypeQuestion)
+        self.pushButtonAjouterQuestion = QtWidgets.QPushButton(self.verticalLayoutWidget_14)
+        self.pushButtonAjouterQuestion.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                     "\n"
+                                                     "")
+        self.pushButtonAjouterQuestion.setObjectName("pushButtonAjouterQuestion")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.pushButtonAjouterQuestion)
+        self.lineEditAjoutQuestion = QtWidgets.QLineEdit(self.verticalLayoutWidget_14)
+        self.lineEditAjoutQuestion.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                 "")
+        self.lineEditAjoutQuestion.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.lineEditAjoutQuestion.setObjectName("lineEditAjoutQuestion")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.lineEditAjoutQuestion)
+        self.verticalLayout_21.addLayout(self.formLayout)
+        self.verticalLayoutWidget_15 = QtWidgets.QWidget(self.pagePartieCustom)
+        self.verticalLayoutWidget_15.setGeometry(QtCore.QRect(360, 320, 151, 51))
+        self.verticalLayoutWidget_15.setObjectName("verticalLayoutWidget_15")
+        self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_15)
+        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_22.setObjectName("verticalLayout_22")
+        self.pushButtonLancerPartieCustom = QtWidgets.QPushButton(self.verticalLayoutWidget_15)
+        self.pushButtonLancerPartieCustom.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                        "\n"
+                                                        "")
+        self.pushButtonLancerPartieCustom.setObjectName("pushButtonLancerPartieCustom")
+        self.verticalLayout_22.addWidget(self.pushButtonLancerPartieCustom)
         self.stackedWidget.addWidget(self.pagePartieCustom)
         self.pageAffJeu = QtWidgets.QWidget()
         self.pageAffJeu.setObjectName("pageAffJeu")
@@ -420,7 +480,7 @@ class Ui_MainWindow(BasicWindow):
         self.labelLETYPEDEJEU.setObjectName("labelLETYPEDEJEU")
         self.verticalLayout_7.addWidget(self.labelLETYPEDEJEU)
         self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.pageAffJeu)
-        self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(0, 190, 901, 221))
+        self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(30, 190, 831, 221))
         self.verticalLayoutWidget_4.setObjectName("verticalLayoutWidget_4")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
         self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
@@ -429,19 +489,142 @@ class Ui_MainWindow(BasicWindow):
         self.labelLECONTENUDUJEU.setAlignment(QtCore.Qt.AlignCenter)
         self.labelLECONTENUDUJEU.setObjectName("labelLECONTENUDUJEU")
         self.verticalLayout_15.addWidget(self.labelLECONTENUDUJEU)
+        self.pushButtonRoundSuivant = QtWidgets.QPushButton(self.pageAffJeu)
+        self.pushButtonRoundSuivant.setGeometry(QtCore.QRect(720, 500, 161, 61))
+        self.pushButtonRoundSuivant.setStyleSheet("background-color: rgb(255,133,51);")
+        self.pushButtonRoundSuivant.setObjectName("pushButtonRoundSuivant")
         self.stackedWidget.addWidget(self.pageAffJeu)
+        self.pageEquipe = QtWidgets.QWidget()
+        self.pageEquipe.setObjectName("pageEquipe")
+        self.verticalLayoutWidget_7 = QtWidgets.QWidget(self.pageEquipe)
+        self.verticalLayoutWidget_7.setGeometry(QtCore.QRect(0, 20, 901, 80))
+        self.verticalLayoutWidget_7.setObjectName("verticalLayoutWidget_7")
+        self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_7)
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_16.setObjectName("verticalLayout_16")
+        self.labelEquipe = QtWidgets.QLabel(self.verticalLayoutWidget_7)
+        self.labelEquipe.setStyleSheet("font: 26pt \"MS PGothic\";")
+        self.labelEquipe.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelEquipe.setObjectName("labelEquipe")
+        self.verticalLayout_16.addWidget(self.labelEquipe)
+        self.verticalLayoutWidget_5 = QtWidgets.QWidget(self.pageEquipe)
+        self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(150, 110, 561, 91))
+        self.verticalLayoutWidget_5.setObjectName("verticalLayoutWidget_5")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_5)
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.labelNomDuJoueur = QtWidgets.QLabel(self.verticalLayoutWidget_5)
+        self.labelNomDuJoueur.setObjectName("labelNomDuJoueur")
+        self.horizontalLayout.addWidget(self.labelNomDuJoueur)
+        self.lineEditAjoutJoueur = QtWidgets.QLineEdit(self.verticalLayoutWidget_5)
+        self.lineEditAjoutJoueur.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                               "")
+        self.lineEditAjoutJoueur.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEditAjoutJoueur.setObjectName("lineEditAjoutJoueur")
+        self.horizontalLayout.addWidget(self.lineEditAjoutJoueur)
+        self.verticalLayout_17.addLayout(self.horizontalLayout)
+        self.pushButtonAjoutJoueur = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
+        self.pushButtonAjoutJoueur.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                 "\n"
+                                                 "")
+        self.pushButtonAjoutJoueur.setObjectName("pushButtonAjoutJoueur")
+        self.verticalLayout_17.addWidget(self.pushButtonAjoutJoueur)
+        self.verticalLayoutWidget_9 = QtWidgets.QWidget(self.pageEquipe)
+        self.verticalLayoutWidget_9.setGeometry(QtCore.QRect(160, 230, 541, 301))
+        self.verticalLayoutWidget_9.setObjectName("verticalLayoutWidget_9")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_9)
+        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.listWidgetEquipeDeJeu = QtWidgets.QListWidget(self.verticalLayoutWidget_9)
+        self.listWidgetEquipeDeJeu.setItemAlignment(QtCore.Qt.AlignHCenter)
+        self.listWidgetEquipeDeJeu.setObjectName("listWidgetEquipeDeJeu")
+        self.verticalLayout_18.addWidget(self.listWidgetEquipeDeJeu)
+        self.pushButtonEquipeFaiteLancerPartieRapide = QtWidgets.QPushButton(self.verticalLayoutWidget_9)
+        self.pushButtonEquipeFaiteLancerPartieRapide.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                                   "")
+        self.pushButtonEquipeFaiteLancerPartieRapide.setObjectName("pushButtonEquipeFaiteLancerPartieRapide")
+        self.verticalLayout_18.addWidget(self.pushButtonEquipeFaiteLancerPartieRapide)
+        self.stackedWidget.addWidget(self.pageEquipe)
+        self.pageAPropos = QtWidgets.QWidget()
+        self.pageAPropos.setObjectName("pageAPropos")
+        self.verticalLayoutWidget_12 = QtWidgets.QWidget(self.pageAPropos)
+        self.verticalLayoutWidget_12.setGeometry(QtCore.QRect(0, 30, 901, 80))
+        self.verticalLayoutWidget_12.setObjectName("verticalLayoutWidget_12")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_12)
+        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.labelAProposTitre = QtWidgets.QLabel(self.verticalLayoutWidget_12)
+        self.labelAProposTitre.setStyleSheet("font: 26pt \"MS PGothic\";")
+        self.labelAProposTitre.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelAProposTitre.setObjectName("labelAProposTitre")
+        self.verticalLayout_19.addWidget(self.labelAProposTitre)
+        self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.pageAPropos)
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(0, 160, 891, 231))
+        self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        self.labelAProposContenu = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
+        self.labelAProposContenu.setObjectName("labelAProposContenu")
+        self.horizontalLayout_10.addWidget(self.labelAProposContenu)
+        self.verticalLayoutWidget_13 = QtWidgets.QWidget(self.pageAPropos)
+        self.verticalLayoutWidget_13.setGeometry(QtCore.QRect(0, 450, 901, 80))
+        self.verticalLayoutWidget_13.setObjectName("verticalLayoutWidget_13")
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_13)
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.pushButtonRetourversMenu = QtWidgets.QPushButton(self.verticalLayoutWidget_13)
+        self.pushButtonRetourversMenu.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                    "\n"
+                                                    "")
+        self.pushButtonRetourversMenu.setObjectName("pushButtonRetourversMenu")
+        self.verticalLayout_20.addWidget(self.pushButtonRetourversMenu)
+        self.stackedWidget.addWidget(self.pageAPropos)
+        self.pageFIN = QtWidgets.QWidget()
+        self.pageFIN.setObjectName("pageFIN")
+        self.verticalLayoutWidget_16 = QtWidgets.QWidget(self.pageFIN)
+        self.verticalLayoutWidget_16.setGeometry(QtCore.QRect(0, 30, 901, 80))
+        self.verticalLayoutWidget_16.setObjectName("verticalLayoutWidget_16")
+        self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_16)
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_23.setObjectName("verticalLayout_23")
+        self.labelTitreFin = QtWidgets.QLabel(self.verticalLayoutWidget_16)
+        self.labelTitreFin.setStyleSheet("font: 26pt \"MS PGothic\";")
+        self.labelTitreFin.setObjectName("labelTitreFin")
+        self.verticalLayout_23.addWidget(self.labelTitreFin, 0, QtCore.Qt.AlignHCenter)
+        self.pushButtonFinRetourMenu = QtWidgets.QPushButton(self.pageFIN)
+        self.pushButtonFinRetourMenu.setGeometry(QtCore.QRect(320, 440, 251, 61))
+        self.pushButtonFinRetourMenu.setStyleSheet("background-color: rgb(255,133,51);\n"
+                                                   "\n"
+                                                   "")
+        self.pushButtonFinRetourMenu.setObjectName("pushButtonFinRetourMenu")
+        self.verticalLayoutWidget_17 = QtWidgets.QWidget(self.pageFIN)
+        self.verticalLayoutWidget_17.setGeometry(QtCore.QRect(0, 190, 901, 80))
+        self.verticalLayoutWidget_17.setObjectName("verticalLayoutWidget_17")
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_17)
+        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        self.labelMercijouelol = QtWidgets.QLabel(self.verticalLayoutWidget_17)
+        self.labelMercijouelol.setStyleSheet("font: 22pt \"Segoe Script\";\n"
+                                             "font: 24pt \"Gill Sans MT\";")
+        self.labelMercijouelol.setObjectName("labelMercijouelol")
+        self.verticalLayout_24.addWidget(self.labelMercijouelol, 0, QtCore.Qt.AlignHCenter)
+        self.stackedWidget.addWidget(self.pageFIN)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.actionOui = QtWidgets.QAction(MainWindow)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/rec/Photos/(m=e-yaaGqaa)(mh=3u682Et6NxDM2jbp)original_121743021.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/rec/Photos/(m=e-yaaGqaa)(mh=3u682Et6NxDM2jbp)original_121743021.jpg"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionOui.setIcon(icon)
         self.actionOui.setObjectName("actionOui")
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.show()
 
@@ -453,6 +636,7 @@ class Ui_MainWindow(BasicWindow):
         self.labelPasswordConnexion.setText(_translate("MainWindow", "Mot de passe"))
         self.ButtonConnexion.setText(_translate("MainWindow", "Connexion"))
         self.ButtonInscriptionPageConnexion.setText(_translate("MainWindow", "Inscription"))
+        self.labelConnexionRouge.setText(_translate("MainWindow", ""))
         self.labelEmbuscadeConnexion.setText(_translate("MainWindow", "Embuscade"))
         self.labelInscription.setText(_translate("MainWindow", "Embuscade"))
         self.labelConnexion_2.setText(_translate("MainWindow", "Inscription"))
@@ -461,20 +645,86 @@ class Ui_MainWindow(BasicWindow):
         self.labelPseudoConnexion_3.setText(_translate("MainWindow", "Pseudo"))
         self.labelPasswordInscription_4.setText(_translate("MainWindow", "Mot de passe"))
         self.ButtonInscriptionPageInscription.setText(_translate("MainWindow", "Inscription"))
-        #self.ButtonInscriptionPageInscription.clicked.connect(QtWidgets.QApplication.instance().quit)
+        self.ButtonRetourInscription.setText(_translate("MainWindow", "Retour"))
+        self.labelInscriptionRouge.setText(_translate("MainWindow", ""))
         self.BoutonPartieRapide.setText(_translate("MainWindow", "Partie rapide"))
         self.BoutonPartieCustom.setText(_translate("MainWindow", "Partie custom"))
         self.BoutonAPropos.setText(_translate("MainWindow", "A propos"))
         self.labelEmbuscadeChoixJeu.setText(_translate("MainWindow", "Embuscade"))
+        self.label_2.setText(_translate("MainWindow", "Partie custom"))
         self.labelNbRounds.setText(_translate("MainWindow", "Nombre de rounds"))
-        self.pushButtonAjouterQuestion.setText(_translate("MainWindow", "Ajouter question"))
         self.label.setText(_translate("MainWindow", "Type de question"))
         self.comboBoxTypeQuestion.setCurrentText(_translate("MainWindow", "Question"))
         self.comboBoxTypeQuestion.setItemText(0, _translate("MainWindow", "Question"))
         self.comboBoxTypeQuestion.setItemText(1, _translate("MainWindow", "Action/Verite"))
         self.comboBoxTypeQuestion.setItemText(2, _translate("MainWindow", "Virus"))
         self.comboBoxTypeQuestion.setItemText(3, _translate("MainWindow", "Jeu"))
-        self.label_2.setText(_translate("MainWindow", "Partie custom"))
+        self.pushButtonAjouterQuestion.setText(_translate("MainWindow", "Ajouter question"))
+        self.pushButtonLancerPartieCustom.setText(_translate("MainWindow", "Lancer la partie"))
         self.labelLETYPEDEJEU.setText(_translate("MainWindow", "Le jeu"))
         self.labelLECONTENUDUJEU.setText(_translate("MainWindow", "ICI LA QUESTION ICI"))
+        self.pushButtonRoundSuivant.setText(_translate("MainWindow", "Round suivant"))
+        self.labelEquipe.setText(_translate("MainWindow", "Equipe"))
+        self.labelNomDuJoueur.setText(_translate("MainWindow", "Nom du joueur"))
+        self.pushButtonAjoutJoueur.setText(_translate("MainWindow", "Ajouter joueur"))
+        self.pushButtonEquipeFaiteLancerPartieRapide.setText(
+            _translate("MainWindow", "L\'équipe est faite ! (lancer le jeu)"))
+        self.labelAProposTitre.setText(_translate("MainWindow", "A propos"))
+        self.labelAProposContenu.setText(_translate("MainWindow", "Ici on met le texte de a propos, coucou Cemo"))
+        self.pushButtonRetourversMenu.setText(_translate("MainWindow", "Retour"))
+        self.labelTitreFin.setText(_translate("MainWindow", "FIN"))
+        self.pushButtonFinRetourMenu.setText(_translate("MainWindow", "Retour menu"))
+        self.labelMercijouelol.setText(_translate("MainWindow", "Merci d\'avoir joué ! "))
         self.actionOui.setText(_translate("MainWindow", "Oui"))
+
+        self.ButtonInscriptionPageInscription.clicked.connect(self.registerCheck)
+        # self.ButtonInscriptionPageInscription.clicked.connect(QtWidgets.QApplication.instance().quit)
+        self.ButtonInscriptionPageConnexion.clicked.connect(self.goToRegister)
+        self.ButtonConnexion.clicked.connect(self.connexionCheck)
+        self.ButtonRetourInscription.clicked.connect(self.goToConnexion)
+
+    def goToRegister(self):
+        self.stackedWidget.setCurrentIndex(1)
+
+    def goToMenu(self):
+        self.stackedWidget.setCurrentIndex(2)
+
+    def goToPartieCustom(self):
+        self.stackedWidget.setCurrentIndex(3)
+
+    def goToAffJeu(self):
+        self.stackedWidget.setCurrentIndex(4)
+
+    def goToConnexion(self):
+        self.stackedWidget.setCurrentIndex(0)
+
+    def registerCheck(self):
+        if (self.lineEditNomInscription.text().strip()) and (self.lineEditPrenomInscription.text().strip()) and (
+                self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
+
+            self.labelInscriptionRouge.setText("")
+            if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
+                self.labelInscriptionRouge.setText("Ce pseudo existe deja")
+            else:
+
+                data = {'name': self.lineEditNomInscription.text().strip(),
+                        'surname': self.lineEditPrenomInscription.text().strip(),
+                        'nickname': self.lineEditPseudoInscription.text().strip(),
+                        'password': self.lineEditPasswordInscription.text().strip()}
+                self._player_controller.create_player(data)
+
+            self.goToConnexion()
+
+        else:
+            self.labelInscriptionRouge.setText("Veuillez remplir tout les champs")
+
+    def connexionCheck(self):
+        if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
+            print(self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()))
+            """if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
+                self.labelConnexionRouge.setText("Vous êtes connecté")
+            else:
+                self.labelConnexionRouge.setText("Ce pseudo n'existe pas")"""
+        else:
+            self.labelConnexionRouge.setText(
+                "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")
