@@ -14,7 +14,7 @@ class PlayerDAO(DAO):
 
     def connexion(self, nickname, password):
         try:
-            return self._database_session.query(Player).filter_by(nickname=nickname, password=password).order_by(Player.nickname).one()
+            return self._database_session.query(Player).filter_by(nickname=nickname).order_by(Player.nickname).one()
         except NoResultFound:
             raise ResourceNotFound()
 
@@ -30,10 +30,10 @@ class PlayerDAO(DAO):
         except NoResultFound:
             raise ResourceNotFound()
 
-    def get_player_by_nickname(self, player_name):
+    def get_player_by_nickname(self, nickname):
         try:
-            print(self._database_session.query(Player).filter_by(nickname=player_name).order_by(Player.nickname).one())
-            return self._database_session.query(Player).filter_by(nickname=player_name).order_by(Player.nickname).one()
+            print(nickname)
+            return self._database_session.query(Player).filter_by(nickname=nickname).order_by(Player.nickname).one()
         except NoResultFound:
             raise ResourceNotFound()
 

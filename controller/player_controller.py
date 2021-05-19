@@ -16,19 +16,23 @@ class PlayerController:
         return players_data
 
     def get_player(self, player_id):
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             player = PlayerDAO(session).get(player_id)
             player_data = player.to_dict()
         return player_data
 
-    def get_player_by_nickname(self, player_name):
-        with self._database_engine.new_session as session:
+    def get_player_by_nick(self, player_name):
+        print("Lancement Get Player")
+        print("Player : "+player_name)
+        with self._database_engine.new_session() as session:
+            print("Etape 2")
             player = PlayerDAO(session).get_player_by_nickname(player_name)
+            print("Player 2 : "+player)
             player_data = player.to_dict()
         return player_data
 
     def connexion(self, player_name, player_password):
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             player = PlayerDAO(session).connexion(player_name, player_password)
             player_data = player.to_dict()
         return player_data

@@ -6,7 +6,6 @@ from sqlalchemy import Column, String, UniqueConstraint
 
 class Player(Base):
     __tablename__ = "players"
-    __table_args__ = (UniqueConstraint('id', 'nickname'),)
 
     id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
 
