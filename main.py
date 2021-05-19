@@ -13,6 +13,7 @@ from vue.embuscade import Ui_MainWindow as MainWindow
 
 from exceptions import Error
 
+
 def run():
     database_engine = DatabaseEngine(url='sqlite:///embuscade.db')
     database_engine.create_database()
@@ -43,13 +44,13 @@ def run():
     for embuscade in embuscade_file.readlines():
         embuscade_controller.create_embuscade(embuscade)
     for jeu in jeu_file.readlines():
-        jeu_controller.create_jeu(jeu)
+        jeu_controller.create_jeu(jeu)"""
 
     app = QApplication(sys.argv)
 
     MWind = QMainWindow()
     ui = MainWindow(player_controller, database_engine, MWind)
-    sys.exit(app.exec_())"""
+    sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
@@ -73,5 +74,3 @@ if __name__ == '__main__':
 
     for t in admin_controller.list_player():
         print(t)"""
-
-
