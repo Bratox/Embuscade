@@ -703,15 +703,16 @@ class Ui_MainWindow(BasicWindow):
                 self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
 
             self.labelInscriptionRouge.setText("")
-            if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
-                self.labelInscriptionRouge.setText("Ce pseudo existe deja")
-            else:
 
-                data = {'name': self.lineEditNomInscription.text().strip(),
-                        'surname': self.lineEditPrenomInscription.text().strip(),
-                        'nickname': self.lineEditPseudoInscription.text().strip(),
-                        'password': self.lineEditPasswordInscription.text().strip()}
-                self._player_controller.create_player(data)
+            """if self._player_controller.get_player_by_nick(self.lineEditPseudoInscription.text().strip()):
+                self.labelInscriptionRouge.setText("Ce pseudo existe deja")
+            else:"""
+
+            data = {'name': self.lineEditNomInscription.text().strip(),
+                    'surname': self.lineEditPrenomInscription.text().strip(),
+                    'nickname': self.lineEditPseudoInscription.text().strip(),
+                    'password': self.lineEditPasswordInscription.text().strip()}
+            self._player_controller.create_player(data)
 
             self.goToConnexion()
 
@@ -720,11 +721,9 @@ class Ui_MainWindow(BasicWindow):
 
     def connexionCheck(self):
         if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
-            print(self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()))
-            """if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
-                self.labelConnexionRouge.setText("Vous êtes connecté")
-            else:
-                self.labelConnexionRouge.setText("Ce pseudo n'existe pas")"""
+            self.labelConnexionRouge.setText("Yes")
+            if (self._player_controller.connexion(self.lineEditPseudoConnexion.text().strip(), self.lineEditPasswordConnexion.text().strip())):
+                self.labelConnexionRouge.setText("Connecte")
         else:
             self.labelConnexionRouge.setText(
                 "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")
