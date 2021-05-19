@@ -630,7 +630,7 @@ class Ui_MainWindow(BasicWindow):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Embuscade"))
         self.labelConnexion.setText(_translate("MainWindow", "Connexion"))
         self.labelPseudoConnexion.setText(_translate("MainWindow", "Pseudo"))
         self.labelPasswordConnexion.setText(_translate("MainWindow", "Mot de passe"))
@@ -680,7 +680,7 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonInscriptionPageInscription.clicked.connect(self.registerCheck)
         # self.ButtonInscriptionPageInscription.clicked.connect(QtWidgets.QApplication.instance().quit)
         self.ButtonInscriptionPageConnexion.clicked.connect(self.goToRegister)
-        self.ButtonConnexion.clicked.connect(self.goToMenu)
+        self.ButtonConnexion.clicked.connect(self.connexionCheck)
         self.ButtonRetourInscription.clicked.connect(self.goToConnexion)
 
     def goToRegister(self):
@@ -699,8 +699,32 @@ class Ui_MainWindow(BasicWindow):
         self.stackedWidget.setCurrentIndex(0)
 
     def registerCheck(self):
-        if (self.lineEditNomInscription.text().strip()) and (self.lineEditPrenomInscription.text().strip()) and (self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
+        if (self.lineEditNomInscription.text().strip()) and (self.lineEditPrenomInscription.text().strip()) and (
+                self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
+
             self.labelInscriptionRouge.setText("")
-            print("OK")
+            if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
+                self.labelInscriptionRouge.setText("Ce pseudo existe deja")
+            else:
+
+                data = {'name': self.lineEditNomInscription.text().strip(),
+                        'surname': self.lineEditPrenomInscription.text().strip(),
+                        'nickname': self.lineEditPseudoInscription.text().strip(),
+                        'password': self.lineEditPasswordInscription.text().strip()}
+                self._player_controller.create_player(data)
+
+            self.goToConnexion()
+
         else:
             self.labelInscriptionRouge.setText("Veuillez remplir tout les champs")
+
+    def connexionCheck(self):
+        if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
+            print(self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()))
+            """if self._player_controller.get_player_by_nickname(self.lineEditPseudoConnexion.text().strip()):
+                self.labelConnexionRouge.setText("Vous êtes connecté")
+            else:
+                self.labelConnexionRouge.setText("Ce pseudo n'existe pas")"""
+        else:
+            self.labelConnexionRouge.setText(
+                "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")

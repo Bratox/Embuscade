@@ -21,6 +21,18 @@ class PlayerController:
             player_data = player.to_dict()
         return player_data
 
+    def get_player_by_nickname(self, player_name):
+        with self._database_engine.new_session as session:
+            player = PlayerDAO(session).get_player_by_nickname(player_name)
+            player_data = player.to_dict()
+        return player_data
+
+    def connexion(self, player_name, player_password):
+        with self._database_engine.new_session as session:
+            player = PlayerDAO(session).connexion(player_name, player_password)
+            player_data = player.to_dict()
+        return player_data
+
     def create_player(self, data):
 
         try:

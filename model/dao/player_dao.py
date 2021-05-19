@@ -30,6 +30,13 @@ class PlayerDAO(DAO):
         except NoResultFound:
             raise ResourceNotFound()
 
+    def get_player_by_nickname(self, player_name):
+        try:
+            print(self._database_session.query(Player).filter_by(nickname=player_name).order_by(Player.nickname).one())
+            return self._database_session.query(Player).filter_by(nickname=player_name).order_by(Player.nickname).one()
+        except NoResultFound:
+            raise ResourceNotFound()
+
     def create(self, data: dict):
         try:
             player = Player(nickname=data.get('nickname'), name=data.get('name'), surname=data.get('surname'),
