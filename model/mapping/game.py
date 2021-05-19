@@ -10,7 +10,7 @@ class Game(Base):
 
     id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
 
-    creator_id = Column(String, ForeignKey('player.id'))
+    creator_id = Column(String, ForeignKey('players.id'))
     nbround = Column(Integer, nullable=False)
 
     def to_dict(self):
