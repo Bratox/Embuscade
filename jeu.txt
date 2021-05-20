@@ -1,27 +1,24 @@
-Citez tour à tour une célébrité dont le nom commence par la lettre N, x commence.
+Citez tour à tour une célébrité dont le nom commence par la lettre N, name_joueur commence.
 Le premier qui trouve un objet rouge dans la pièce gagne.
 La première personne à faire l’équilibre gagne.
-Citez tour à tour les personnages de star wars, x commence.
-Les personnages Disney, x commence.
-Les acteurs personnages de The Walking Dead, x commence.
+Citez tour à tour les personnages de star wars, name_joueur commence.
+Les personnages Disney, name_joueur commence.
+Les acteurs personnages de The Walking Dead, name_joueur commence.
 Le premier qui trouve un alcool qui commence par la lettre C.
-Citez les différents alcools, x commence.
-Votez à main levée pour un vrai ou faux : Le cœur d'une crevette est logé dans sa tête. (VRAI)
-Votez à main levée pour un vrai ou faux :Les rats se multiplient si rapidement qu'en 18 mois, un couple de rat peut avoir plus d'un million de descendants.(VRAI)
-Votez à main levée pour un vrai ou faux :Le briquet a été inventé avant l’allumette.(VRAI)
-Votez à main levée pour un vrai ou faux :À l'origine, le Coca-Cola était vert.(VRAI)
-Votez à main levée pour un vrai ou faux :Le plus jeune Pape était âgé de 12 ans. (VRAI)
-Votez à main levée pour un vrai ou faux :Les gilets pare-balles, les escaliers de secours, les essuie-glace, les imprimantes laser ont tous été inventés par des femmes.(VRAI)
-Votez à main levé pour un vrai ou faux :F.U.C.K. signifie Fornication Under Consent of King.(VRAI)
-Votez à main levée pour un vrai ou faux :
-Un 'fuligule' est un canard plongeur qui vient en France pour l'hiver.(VRAI)
-
-Votez à main levée pour un vrai ou faux :
-Dans l'armée de l'air, il existe le grade d'amiral .(FAUX)
-Votez à main levée pour un vrai ou faux :La langue-de-chat est un petit biscuit sec.(VRAI)
-Votez à main levée pour un vrai ou faux :Un lemming est oiseau de Scandinavie. (FAUX)
-Votez à main levée pour un vrai ou faux :Le lempira est la monnaie du Mali.(FAUX)
-Votez à main levée pour un vrai ou faux :Il existe un festival sous l'eau.(VRAI)
+Citez les différents alcools, name_joueur commence.
+Votez à main levée pour un vrai ou faux : Le cœur d'une crevette est logé dans sa tête.
+Votez à main levée pour un vrai ou faux : Les rats se multiplient si rapidement qu'en 18 mois, un couple de rat peut avoir plus d'un million de descendants.
+Votez à main levée pour un vrai ou faux : Le briquet a été inventé avant l’allumette.
+Votez à main levée pour un vrai ou faux : À l'origine, le Coca-Cola était vert.
+Votez à main levée pour un vrai ou faux : Le plus jeune Pape était âgé de 12 ans.
+Votez à main levée pour un vrai ou faux : Les gilets pare-balles, les escaliers de secours, les essuie-glace, les imprimantes laser ont tous été inventés par des femmes.
+Votez à main levée pour un vrai ou faux : F.U.C.K. signifie Fornication Under Consent of King.
+Votez à main levée pour un vrai ou faux : Un 'fuligule' est un canard plongeur qui vient en France pour l'hiver.
+Votez à main levée pour un vrai ou faux : Dans l'armée de l'air, il existe le grade d'amiral.
+Votez à main levée pour un vrai ou faux : La langue-de-chat est un petit biscuit sec.
+Votez à main levée pour un vrai ou faux : Un lemming est oiseau de Scandinavie.
+Votez à main levée pour un vrai ou faux : Le lempira est la monnaie du Mali.
+Votez à main levée pour un vrai ou faux : Il existe un festival sous l'eau.
 Faites un tour de je n’ai jamais, si quelqu’un l’a fait, il prend 2 gorgées !
 Votez à main levée: Droite ou gauche ?
 Votez à main levée: Noir ou blanc ?

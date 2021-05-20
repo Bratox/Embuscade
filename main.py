@@ -2,15 +2,9 @@ import sys
 import secrets
 from controller.player_controller import PlayerController
 from controller.question_controller import QuestionController
-from controller.virus_controller import VirusController
-from controller.jeu_controller import jeuController
-from controller.act_ver_controllers import Act_verController
-from controller.embuscade_controller import EmbuscadeController
-from controller.game_controller import GameController
 from model.database import DatabaseEngine
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from vue.embuscade import Ui_MainWindow as MainWindow
-import uuid
 
 from exceptions import Error
 
@@ -19,24 +13,13 @@ def run():
     database_engine = DatabaseEngine(url='sqlite:///embuscade.db')
     database_engine.create_database()
     player_controller = PlayerController(database_engine)
+    question_controller = QuestionController(database_engine)
 
     question_file = open("question.txt", "r")
     virus_file = open("virus.txt", "r")
     embuscade_file = open("embuscade.txt", "r")
     act_ver_file = open("act_ver.txt", "r")
     jeu_file = open("jeu.txt", "r")
-
-    question_controller = QuestionController(database_engine)
-    virus_controller = VirusController(database_engine)
-    act_ver_controller = Act_verController(database_engine)
-    embuscade_controller = EmbuscadeController(database_engine)
-    jeu_controller = jeuController(database_engine)
-    #question_controller.create_question({'exp':"question1"})
-    #question_controller.create_question({'exp':"question2"})
-
-
-    for t in question_controller.list_question():
-        print(t)
 
     for p in player_controller.list_player():
         print(p)
@@ -49,6 +32,14 @@ def run():
 
     for t in question_controller.list_question():
         print(t)"""
+
+    """list_game_player = ['Bratox', 'Gryff', 'Sirium', 'Nono', 'Kaiser']
+    list_question = []
+
+    for question in question_controller.list_question():
+        list_question.append(str(question.get('exp')).replace('name_joueur', list_game_player[secrets.randbelow(len(list_game_player))]))
+
+    print(list_question)"""
 
     """for question in question_file.readlines():
         print(question)

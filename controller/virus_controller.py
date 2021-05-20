@@ -31,7 +31,7 @@ class VirusController:
                 return virus_data
         except Error as e:
             # log error
-            raise e
+            return None
 
     def update_virus(self, virus_id, virus_data):
         with self._database_engine.new_session() as session:

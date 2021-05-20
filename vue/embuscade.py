@@ -10,11 +10,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from vue.window import BasicWindow
+import secrets
 from controller.player_controller import PlayerController
 from model.database import DatabaseEngine
 from controller.question_controller import QuestionController
 from controller.virus_controller import VirusController
-from controller.jeu_controller import jeuController
+from controller.jeu_controller import JeuController
 from controller.embuscade_controller import EmbuscadeController
 from controller.game_controller import GameController
 from controller.act_ver_controllers import Act_verController
@@ -27,6 +28,24 @@ class Ui_MainWindow(BasicWindow):
         self._database_engine = database_engine
 
         self.connected_player = None
+        self.nbround = 20
+
+        self.list_game_player = []
+
+        self.tab_jeu = []
+        self.type_ac = []
+
+        self.act_ind = []
+        self.list_act_ver = []
+        self.list_embuscade = []
+        self.list_jeu = []
+        self.list_question = []
+        self.list_virus = []
+        self.end_virus = []
+
+        self._game_controller = GameController(self._database_engine)
+
+        self.current_round = 0
 
         super().__init__()
 
@@ -662,7 +681,7 @@ class Ui_MainWindow(BasicWindow):
         self.comboBoxTypeQuestion.setItemText(2, _translate("MainWindow", "Virus"))
         self.comboBoxTypeQuestion.setItemText(3, _translate("MainWindow", "Jeu"))
         self.pushButtonAjouterQuestion.setText(_translate("MainWindow", "Ajouter question"))
-        self.pushButtonLancerPartieCustom.setText(_translate("MainWindow", "Lancer la partie"))
+        self.pushButtonLancerPartieCustom.setText(_translate("MainWindow", "Gestion Equipe"))
         self.labelLETYPEDEJEU.setText(_translate("MainWindow", "Le jeu"))
         self.labelLECONTENUDUJEU.setText(_translate("MainWindow", "ICI LA QUESTION ICI"))
         self.pushButtonRoundSuivant.setText(_translate("MainWindow", "Round suivant"))
@@ -680,10 +699,19 @@ class Ui_MainWindow(BasicWindow):
         self.actionOui.setText(_translate("MainWindow", "Oui"))
 
         self.ButtonInscriptionPageInscription.clicked.connect(self.registerCheck)
-        # self.ButtonInscriptionPageInscription.clicked.connect(QtWidgets.QApplication.instance().quit)
         self.ButtonInscriptionPageConnexion.clicked.connect(self.goToRegister)
         self.ButtonConnexion.clicked.connect(self.connexionCheck)
         self.ButtonRetourInscription.clicked.connect(self.goToConnexion)
+        self.BoutonPartieCustom.clicked.connect(self.goToPartieCustom)
+        self.pushButtonLancerPartieCustom.clicked.connect(self.goToEquipeFromCustom)
+        self.pushButtonEquipeFaiteLancerPartieRapide.clicked.connect(self.goToAffJeu)
+        self.BoutonPartieRapide.clicked.connect(self.goToEquipe)
+        self.BoutonAPropos.clicked.connect(self.goToAPropos)
+        self.pushButtonRetourversMenu.clicked.connect(self.goToMenu)
+        self.pushButtonAjoutJoueur.clicked.connect(self.addJoueur)
+        self.pushButtonAjouterQuestion.clicked.connect(self.addQuestion)
+        self.pushButtonRoundSuivant.clicked.connect(self.nextRound)
+        self.pushButtonFinRetourMenu.clicked.connect(self.resetGame)
 
     def goToRegister(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -692,13 +720,183 @@ class Ui_MainWindow(BasicWindow):
         self.stackedWidget.setCurrentIndex(2)
 
     def goToPartieCustom(self):
+
         self.stackedWidget.setCurrentIndex(3)
 
+    def resetGame(self):
+        self.stackedWidget.setCurrentIndex(2)
+
+        self.tab_jeu.clear()
+        self.type_ac.clear()
+        self.current_round = 0
+        self.nbround = 20
+        self.list_game_player.clear()
+        self.list_jeu.clear()
+        self.list_embuscade.clear()
+        self.list_act_ver.clear()
+        self.list_virus.clear()
+        self.list_question.clear()
+
+    def nextRound(self):
+
+        if self.current_round == (len(self.tab_jeu) - 1):
+            self.stackedWidget.setCurrentIndex(7)
+        else:
+            self.current_round += 1
+            self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
+            contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))]) + " ROUND : " + str(self.current_round)
+            contenu = contenu.replace('name_joueur2', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            self.labelLECONTENUDUJEU.setText(contenu)
+
+    def goToEquipeFromCustom(self):
+        self.nbround = int(self.spinBoxNbRound.text())
+        self.stackedWidget.setCurrentIndex(5)
+        self.list_equip()
+
+    def addQuestion(self):
+        ind = self.comboBoxTypeQuestion.currentText()
+
+        if ind == 'Question':
+            self.list_question.append(self.lineEditAjoutQuestion.text().strip())
+        elif ind == 'Jeu':
+            self.list_jeu.append(self.lineEditAjoutQuestion.text().strip())
+        elif ind == 'Virus':
+            self.list_virus.append(self.lineEditAjoutQuestion.text().strip())
+        elif ind == 'Action/Verite':
+            self.list_act_ver.append(self.lineEditAjoutQuestion.text().strip())
+
+        self.lineEditAjoutQuestion.setText("")
+
     def goToAffJeu(self):
+
+        question_controller = QuestionController(self._database_engine)
+        act_ver_controller = Act_verController(self._database_engine)
+        embuscade_controller = EmbuscadeController(self._database_engine)
+        jeu_controller = JeuController(self._database_engine)
+        virus_controller = VirusController(self._database_engine)
+
+        for question in question_controller.list_question():
+            self.list_question.append(str(question.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))]))
+
+        for act_ver in act_ver_controller.list_act_vers():
+            self.list_act_ver.append(str(act_ver.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))]))
+
+        for jeu in jeu_controller.list_jeux():
+            text = str(jeu.get('exp')).replace('name_joueur',
+                                               self.list_game_player[secrets.randbelow(len(self.list_game_player))])
+            text = text.replace('name_joueur2', self.list_game_player[secrets.randbelow(len(self.list_game_player))])
+            self.list_jeu.append(text)
+
+        for embuscade in embuscade_controller.list_embuscades():
+            self.list_embuscade.append(str(embuscade.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))]))
+
+        for virus in virus_controller.list_virus():
+            self.list_virus.append(str(virus.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))]))
+
+        quest_fait = []
+        virus_fait = []
+        act_ver_fait = []
+        jeu_fait = []
+        embuscade_fait = []
+
+        index = 0
+        for i in range(self.nbround):
+            type = secrets.randbelow(100) + 1
+
+            if (type >= 1) and (type <= 28):
+
+                num = secrets.randbelow(len(self.list_question))
+                while num in quest_fait:
+                    num = secrets.randbelow(len(self.list_question))
+                quest_fait.append(num)
+                self.type_ac.append('Question')
+                self.tab_jeu.append(self.list_question[num])
+
+            elif (type >= 29) and (type <= 56):
+
+                num = secrets.randbelow(len(self.list_act_ver))
+                while num in act_ver_fait:
+                    num = secrets.randbelow(len(self.list_act_ver))
+                self.type_ac.append('Action/Verite')
+                self.tab_jeu = self.list_act_ver[num]
+
+            elif (type >= 57) and (type <= 84):
+
+                num = secrets.randbelow(len(self.list_jeu))
+                while num in jeu_fait:
+                    num = secrets.randbelow(len(self.list_jeu))
+                self.type_ac.append('Jeu')
+                self.tab_jeu = self.list_jeu[num]
+
+            elif (type >= 85) and (type <= 95):
+
+                num = secrets.randbelow(len(self.list_virus))
+                while num in virus_fait:
+                    num = secrets.randbelow(len(self.list_virus))
+                self.type_ac.append('Virus')
+                self.tab_jeu = self.list_virus[num]
+                self.end_virus.append(index + secrets.randbelow(10))
+
+            elif (type >= 96) and (type <= 101):
+
+                num = secrets.randbelow(len(self.list_embuscade))
+                while num in embuscade_fait:
+                    num = secrets.randbelow(len(self.list_embuscade))
+                self.type_ac.append('Embuscade')
+                self.tab_jeu = self.list_embuscade[num]
+
+            index += 1
+
+        for end in self.end_virus:
+            self.tab_jeu.insert(end, "Fin du Virus, vous êtes guéris")
+            self.type_ac.insert(end, "Virus")
+
+        print(self.tab_jeu)
+        print(len(self.tab_jeu))
+
+        game_data = {'creator_id': self.connected_player.get('id'), 'nbround': self.nbround}
+
+        #TODO Verif create game
+        #self._game_controller.create_game(game_data)
+
         self.stackedWidget.setCurrentIndex(4)
+
+        self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
+        contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
+            secrets.randbelow(len(self.list_game_player))]) + " ROUND : " + str(self.current_round)
+        contenu = contenu.replace('name_joueur2', self.list_game_player[
+            secrets.randbelow(len(self.list_game_player))])
+        self.labelLECONTENUDUJEU.setText(contenu)
+
+    def goToAPropos(self):
+        self.stackedWidget.setCurrentIndex(6)
 
     def goToConnexion(self):
         self.stackedWidget.setCurrentIndex(0)
+
+    def goToEquipe(self):
+        self.stackedWidget.setCurrentIndex(5)
+        self.list_equip()
+
+    def list_equip(self):
+        self.listWidgetEquipeDeJeu.clear()
+        index = 1
+        self.listWidgetEquipeDeJeu.insertItem(index, self.connected_player.get('nickname'))
+        for mmb in self.list_game_player:
+            self.listWidgetEquipeDeJeu.insertItem(index, mmb)
+            index += 1
+
+    def addJoueur(self):
+        if self.lineEditAjoutJoueur.text().strip():
+            self.list_game_player.append(self.lineEditAjoutJoueur.text().strip())
+            self.lineEditAjoutJoueur.setText("")
+            self.list_equip()
 
     def registerCheck(self):
         if (self.lineEditNomInscription.text().strip()) and (self.lineEditPrenomInscription.text().strip()) and (
@@ -735,7 +933,8 @@ class Ui_MainWindow(BasicWindow):
 
                 if self.lineEditPasswordConnexion.text().strip() == data_player.get("password"):
 
-                    self.connected_player = self._player_controller.get_player_by_nick(self.lineEditPseudoConnexion.text().strip())
+                    self.connected_player = self._player_controller.get_player_by_nick(
+                        self.lineEditPseudoConnexion.text().strip())
                     self.lineEditPseudoConnexion.setText("")
                     self.lineEditPasswordConnexion.setText("")
                     self.goToMenu()

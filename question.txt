@@ -38,10 +38,10 @@ Qui pourrait devenir riche ?
 Qui pourrait regarder des films de cul au réveil ?
 Qui pourrait ne jamais aller à la fac ?
 Qui pourrait rater un examen super simple ?
-x , Dans quel pays peut-on trouver la Catalogne, l’Andalousie et la Castille ? Réponse : Espagne
-x, Quel pays a remporté la coupe du monde de football en 2014 ? Réponse :   Allemagne
-x, Qui était le dieu de la guerre dans la mythologie grecque ? Réponse : Arès
-x ,Quel acteur américain incarne le héros du film de Christopher Nolan de 2014  Interstellar ?Réponse : Matthew MacConaughey
-Quelle est la date de la signature de l’armistice de la Première Guerre mondiale ?11 novembre
-A partir duquel de ces légumes peut s'obtenir la vodka ?La pomme de Terre
-Lorsqu'on prend une teq-paf, dans quel ordre se prennent les ingrédients ? Sel , Tequila , Citron
+name_joueur, Dans quel pays peut-on trouver la Catalogne, l’Andalousie et la Castille ?
+name_joueur, Quel pays a remporté la coupe du monde de football en 2014 ?
+name_joueur, Qui était le dieu de la guerre dans la mythologie grecque ?
+name_joueur, Quel acteur américain incarne le héros du film de Christopher Nolan de 2014  Interstellar ?
+Quelle est la date de la signature de l’armistice de la Première Guerre mondiale ?
+A partir duquel de ces légumes peut s'obtenir la vodka ?
+Lorsqu'on prend une teq-paf, dans quel ordre se prennent les ingrédients ?

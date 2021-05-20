@@ -1,5 +1,4 @@
 from model.mapping import Base, generate_id
-import uuid
 
 from sqlalchemy import Column, String, UniqueConstraint, ForeignKey, Integer
 
