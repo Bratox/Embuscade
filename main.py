@@ -30,9 +30,13 @@ def run():
     act_ver_controller = Act_verController(database_engine)
     embuscade_controller = EmbuscadeController(database_engine)
     jeu_controller = jeuController(database_engine)
+    question_controller.create_question({'exp':"question1"})
+    question_controller.create_question({'exp':"question2"})
+
 
     for t in question_controller.list_question():
         print(t)
+        """
     for question in question_file.readlines():
         print(question)
         if(question.split(" ")[0] == "Qui"):
@@ -52,7 +56,7 @@ def run():
 
     MWind = QMainWindow()
     ui = MainWindow(player_controller, database_engine, MWind)
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())"""
 
 
 if __name__ == '__main__':
