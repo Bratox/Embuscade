@@ -1,13 +1,13 @@
-from model.mapping import Base
-import uuid
+from model.mapping import Base, generate_id
 
 from sqlalchemy import Column, String, UniqueConstraint
 
 
 class Player(Base):
     __tablename__ = "players"
+    __table_args__ = (UniqueConstraint('nickname'),)
 
-    id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
+    id = Column(String(36), default=generate_id, primary_key=True)
 
     nickname = Column(String(36), nullable=False)
     name = Column(String(36), nullable=False)

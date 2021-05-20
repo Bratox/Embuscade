@@ -722,8 +722,21 @@ class Ui_MainWindow(BasicWindow):
     def connexionCheck(self):
         if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
             self.labelConnexionRouge.setText("Yes")
-            if (self._player_controller.connexion(self.lineEditPseudoConnexion.text().strip(), self.lineEditPasswordConnexion.text().strip())):
+
+            """data_player = self._player_controller.list_player()[0]
+
+            if data_player.get("password") == self.lineEditPasswordConnexion.text().strip():
                 self.labelConnexionRouge.setText("Connecte")
+            else:
+                self.labelConnexionRouge.setText("Mauvais MDP")"""
+
+            data_player = self._player_controller.get_player_by_nick(self.lineEditPseudoConnexion.text().strip())
+            print("Data_Player : ", data_player)
+            if data_player:
+                if self.lineEditPasswordConnexion.text().strip() == data_player.get("password"):
+                    self.labelConnexionRouge.setText("Connecte")
+                else:
+                    self.labelConnexionRouge.setText("Mauvais MDP")
         else:
             self.labelConnexionRouge.setText(
                 "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")

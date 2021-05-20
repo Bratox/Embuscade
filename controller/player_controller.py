@@ -27,18 +27,23 @@ class PlayerController:
         with self._database_engine.new_session() as session:
             print("Etape 2")
             player = PlayerDAO(session).get_player_by_nickname(player_name)
-            print("Player 2 : "+player)
-            player_data = player.to_dict()
+            if player:
+                print("Player 2 : " + player.nickname)
+                player_data = player.to_dict()
+            else:
+                player_data = None
         return player_data
 
     def connexion(self, player_name, player_password):
         with self._database_engine.new_session() as session:
             player = PlayerDAO(session).connexion(player_name, player_password)
-            player_data = player.to_dict()
+            if player:
+                player_data = player.to_dict()
+            else:
+                player_data = None
         return player_data
 
     def create_player(self, data):
-
         try:
             with self._database_engine.new_session() as session:
                 # Save member in database
@@ -47,7 +52,7 @@ class PlayerController:
                 return player_data
         except Error as e:
             # log error
-            raise e
+            return None
 
     def update_player(self, player_id, player_data):
         with self._database_engine.new_session() as session:

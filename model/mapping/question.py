@@ -1,4 +1,4 @@
-from model.mapping import Base
+from model.mapping import Base, generate_id
 import uuid
 
 from sqlalchemy import Column, Text, UniqueConstraint, String
@@ -7,7 +7,7 @@ from sqlalchemy import Column, Text, UniqueConstraint, String
 class Question(Base):
     __tablename__ = "questions"
 
-    id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
+    id = Column(String(36), default=generate_id, primary_key=True)
 
     exp = Column(Text(), nullable=False)
 
