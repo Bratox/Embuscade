@@ -24,7 +24,7 @@ class Act_verController:
     def create_act_ver(self,data):
 
         try:
-            with self._database_engine.new_session as session:
+            with self._database_engine.new_session() as session:
                 act_ver = act_ver_dao(session).create(data)
                 act_ver_data = act_ver.to_dict()
                 return act_ver_data
@@ -33,14 +33,14 @@ class Act_verController:
 
     def update_act_ver(self,act_ver_id,act_ver_data):
 
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             act_verDAO = act_ver_dao(session)
             act_ver = act_verDAO.get(act_ver_id)
             act_ver = act_verDAO.update(act_ver,act_ver_data)
             return act_ver
 
     def delete_act_ver(self, act_ver_id):
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             act_verDAO = act_ver_dao(session)
             act_ver = act_verDAO.get(act_ver_id)
             act_verDAO.delete(act_ver_id)
