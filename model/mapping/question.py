@@ -9,7 +9,7 @@ class Question(Base):
 
     id = Column(String(36), default=str(uuid.uuid4()), primary_key=True)
 
-    exp = Column(Text, nullable=False)
+    exp = Column(Text(), nullable=False)
 
     def to_dict(self):
         return {
