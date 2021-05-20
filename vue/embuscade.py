@@ -26,6 +26,8 @@ class Ui_MainWindow(BasicWindow):
         self._player_controller = player_controller
         self._database_engine = database_engine
 
+        self.connected_player = None
+
         super().__init__()
 
         self._MWind = Mwind
@@ -703,40 +705,47 @@ class Ui_MainWindow(BasicWindow):
                 self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
 
             self.labelInscriptionRouge.setText("")
+            data_player = self._player_controller.get_player_by_nick(self.lineEditPseudoInscription.text().strip())
 
-            """if self._player_controller.get_player_by_nick(self.lineEditPseudoInscription.text().strip()):
-                self.labelInscriptionRouge.setText("Ce pseudo existe deja")
-            else:"""
+            if data_player:
+                self.labelInscriptionRouge.setText("Ce nom d'utilisateur est existant")
 
-            data = {'name': self.lineEditNomInscription.text().strip(),
-                    'surname': self.lineEditPrenomInscription.text().strip(),
-                    'nickname': self.lineEditPseudoInscription.text().strip(),
-                    'password': self.lineEditPasswordInscription.text().strip()}
-            self._player_controller.create_player(data)
+            else:
 
-            self.goToConnexion()
+                data = {'name': self.lineEditNomInscription.text().strip(),
+                        'surname': self.lineEditPrenomInscription.text().strip(),
+                        'nickname': self.lineEditPseudoInscription.text().strip(),
+                        'password': self.lineEditPasswordInscription.text().strip()}
+                self._player_controller.create_player(data)
+                self.lineEditNomInscription.setText("")
+                self.lineEditPrenomInscription.setText("")
+                self.lineEditPseudoInscription.setText("")
+                self.lineEditPasswordInscription.setText("")
+                self.goToConnexion()
 
         else:
             self.labelInscriptionRouge.setText("Veuillez remplir tout les champs")
 
     def connexionCheck(self):
         if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
-            self.labelConnexionRouge.setText("Yes")
-
-            """data_player = self._player_controller.list_player()[0]
-
-            if data_player.get("password") == self.lineEditPasswordConnexion.text().strip():
-                self.labelConnexionRouge.setText("Connecte")
-            else:
-                self.labelConnexionRouge.setText("Mauvais MDP")"""
+            self.labelConnexionRouge.setText("")
 
             data_player = self._player_controller.get_player_by_nick(self.lineEditPseudoConnexion.text().strip())
-            print("Data_Player : ", data_player)
             if data_player:
+
                 if self.lineEditPasswordConnexion.text().strip() == data_player.get("password"):
-                    self.labelConnexionRouge.setText("Connecte")
+
+                    self.connected_player = self._player_controller.get_player_by_nick(self.lineEditPseudoConnexion.text().strip())
+                    self.lineEditPseudoConnexion.setText("")
+                    self.lineEditPasswordConnexion.setText("")
+                    self.goToMenu()
+
                 else:
-                    self.labelConnexionRouge.setText("Mauvais MDP")
+                    self.labelConnexionRouge.setText("Votre mot de passe est inccorect")
+
+            else:
+                self.labelConnexionRouge.setText("Une ou plusieurs informations sont inccorects")
+
         else:
             self.labelConnexionRouge.setText(
                 "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")

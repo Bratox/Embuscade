@@ -26,13 +26,6 @@ class PlayerDAO(DAO):
 
     def get_player_by_nickname(self, nickname):
         try:
-            print("Pseudo DAO : "+ nickname)
-            return self._database_session.query(Player).filter_by(nickname=nickname).one()
-        except NoResultFound:
-            return None
-
-    def connexion(self, nickname, password):
-        try:
             return self._database_session.query(Player).filter_by(nickname=nickname).one()
         except NoResultFound:
             return None

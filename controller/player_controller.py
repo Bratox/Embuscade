@@ -22,13 +22,9 @@ class PlayerController:
         return player_data
 
     def get_player_by_nick(self, player_name):
-        print("Lancement Get Player")
-        print("Player : "+player_name)
         with self._database_engine.new_session() as session:
-            print("Etape 2")
             player = PlayerDAO(session).get_player_by_nickname(player_name)
             if player:
-                print("Player 2 : " + player.nickname)
                 player_data = player.to_dict()
             else:
                 player_data = None

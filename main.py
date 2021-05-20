@@ -41,8 +41,6 @@ def run():
     for p in player_controller.list_player():
         print(p)
 
-    print(player_controller.get_player("b1a7655d-1126-4851-b0ab-e47c74a744b9"))
-
     """q = 10
     while q <= 15:
         q += 1
@@ -52,12 +50,12 @@ def run():
     for t in question_controller.list_question():
         print(t)"""
 
-    for question in question_file.readlines():
+    """for question in question_file.readlines():
         print(question)
         if(question.split(" ")[0] == "Qui"):
             question_controller.create_question({'exp':question+ " \n\n l'heureux.se élu.e se gratifié.e de "+ str(secrets.randbelow(3)+2)+" gorgées."})
         else :
-            question_controller.create_question({ 'exp':question + "\n\n Si la réponse n'est pas bonne, l'inculte prendra "+ str(secrets.randbelow(3)+2)+" gorgées."})
+            question_controller.create_question({ 'exp':question + "\n\n Si la réponse n'est pas bonne, l'inculte prendra "+ str(secrets.randbelow(3)+2)+" gorgées."})"""
     """for virus in virus_file.readlines():
         virus_controller.create_virus({'exp' :virus + "\n\n Tout manquement à ce virus sera puni de "+ str(secrets.randbelow(4)+3)+"\n\n Ce virus dure " + str(secrets.randbelow(2)+1) + " tours"})
     for act_ver in act_ver_file.readlines():
