@@ -647,6 +647,7 @@ class Ui_MainWindow(BasicWindow):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(0)
+        self.labelAProposContenu.setStyleSheet('font :12pt')
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.show()
 
@@ -692,12 +693,25 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonEquipeFaiteLancerPartieRapide.setText(
             _translate("MainWindow", "L\'équipe est faite ! (lancer le jeu)"))
         self.labelAProposTitre.setText(_translate("MainWindow", "A propos"))
-        self.labelAProposContenu.setText(_translate("MainWindow", "Ici on met le texte de a propos, coucou Cemo"))
         self.pushButtonRetourversMenu.setText(_translate("MainWindow", "Retour"))
         self.labelTitreFin.setText(_translate("MainWindow", "FIN"))
         self.pushButtonFinRetourMenu.setText(_translate("MainWindow", "Retour menu"))
         self.labelMercijouelol.setText(_translate("MainWindow", "Merci d\'avoir joué ! "))
         self.actionOui.setText(_translate("MainWindow", "Oui"))
+
+        self.labelAProposContenu.setText(_translate("MainWindow", "Ce jeu est fait pour le projet GLPOO à l'ESIEA de Laval, il a été réaliser par \n"
+                                                                  "Cem GUNGOR, Léo Rabaud et Léo Bendref \n"
+                                                                  "Voici comment fonctionne le jeu :\n"
+                                                                  "Vous pouvez jouer à deux types de partie, une partie rapide dans lequel vous inscrivez les joueurs qui\n"
+                                                                  "vont jouer avec vous et une partie custom dans lequel vous pouvez choisir le nombre de round que vous\n"
+                                                                  "voulez jouer, vous pouvez ajouter des question qui s'afficherons dans le jeu et par la suite vous gérer\n"
+                                                                  "les joueurs avec qui vous jouerez\n\n"
+                                                                  "Vous pouvez créer des question qui prend des joueurs au hasard du groupe avec cette syntaxe : \n"
+                                                                  "premier_joueur : ce texte sera remplacé par un joueur aléatoire de votre groupe\n"
+                                                                  "second_joueur : ce texte sera remplacé par un joueur aléatoire de votre groupe\n"
+                                                                  "Ce type de syntaxe vous permettra de faire tout type d'activité avec le nom de deux joueurs\n"
+                                                                  "Vous pouvez aussi inscrire seulement premier_joueur ou second_joueur pour afficher seulement un\n"
+                                                                  "joueur dans l'activité"))
 
         self.ButtonInscriptionPageInscription.clicked.connect(self.registerCheck)
         self.ButtonInscriptionPageConnexion.clicked.connect(self.goToRegister)
@@ -837,7 +851,7 @@ class Ui_MainWindow(BasicWindow):
         for i in range(self.nbround):
             type = secrets.randbelow(100) + 1
 
-            if (type >= 1) and (type <= 101):
+            if (type >= 1) and (type <= 28):
 
                 num = secrets.randbelow(len(self.list_question))
                 while num in quest_fait:
@@ -846,7 +860,7 @@ class Ui_MainWindow(BasicWindow):
                 self.type_ac.append('Question')
                 self.tab_jeu.append(self.list_question[num])
 
-            """elif (type >= 29) and (type <= 56):
+            elif (type >= 29) and (type <= 56):
 
                 num = secrets.randbelow(len(self.list_act_ver))
                 while num in act_ver_fait:
@@ -877,7 +891,7 @@ class Ui_MainWindow(BasicWindow):
                 while num in embuscade_fait:
                     num = secrets.randbelow(len(self.list_embuscade))
                 self.type_ac.append('Embuscade')
-                self.tab_jeu = self.list_embuscade[num]"""
+                self.tab_jeu = self.list_embuscade[num]
 
             index += 1
 
