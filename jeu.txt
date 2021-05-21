@@ -1,11 +1,11 @@
-Citez tour à tour une célébrité dont le nom commence par la lettre N, name_joueur commence.
+Citez tour à tour une célébrité dont le nom commence par la lettre N, premier_joueur commence.
 Le premier qui trouve un objet rouge dans la pièce gagne.
 La première personne à faire l’équilibre gagne.
-Citez tour à tour les personnages de star wars, name_joueur commence.
-Les personnages Disney, name_joueur commence.
-Les acteurs personnages de The Walking Dead, name_joueur commence.
+Citez tour à tour les personnages de star wars, premier_joueur commence.
+Les personnages Disney, premier_joueur commence.
+Les acteurs personnages de The Walking Dead, premier_joueur commence.
 Le premier qui trouve un alcool qui commence par la lettre C.
-Citez les différents alcools, name_joueur commence.
+Citez les différents alcools, premier_joueur commence.
 Votez à main levée pour un vrai ou faux : Le cœur d'une crevette est logé dans sa tête.
 Votez à main levée pour un vrai ou faux : Les rats se multiplient si rapidement qu'en 18 mois, un couple de rat peut avoir plus d'un million de descendants.
 Votez à main levée pour un vrai ou faux : Le briquet a été inventé avant l’allumette.

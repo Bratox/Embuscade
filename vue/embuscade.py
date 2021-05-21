@@ -745,9 +745,9 @@ class Ui_MainWindow(BasicWindow):
         else:
             self.current_round += 1
             self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
-            contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
+            contenu = str(self.tab_jeu[self.current_round]).replace('premier_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
-            contenu = contenu.replace('name_joueur2', self.list_game_player[
+            contenu = contenu.replace('second_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
             self.labelLECONTENUDUJEU.setText(contenu)
 
@@ -781,9 +781,9 @@ class Ui_MainWindow(BasicWindow):
 
         for question in question_controller.list_question():
 
-            text = str(question.get('exp')).replace('name_joueur', self.list_game_player[
+            text = str(question.get('exp')).replace('premier_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
-            text = text.replace('name_joueur2', self.list_game_player[
+            text = text.replace('second_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
 
             if "Qui" in str(question.get('exp')).split(" ")[0]:
@@ -795,9 +795,9 @@ class Ui_MainWindow(BasicWindow):
 
         for act_ver in act_ver_controller.list_act_vers():
 
-            text = str(act_ver.get('exp')).replace('name_joueur', self.list_game_player[
+            text = str(act_ver.get('exp')).replace('premier_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
-            text = text.replace('name_joueur2', self.list_game_player[
+            text = text.replace('second_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
             text = text + "\n\n En cas de refus, la flemmardise et le.la muet.te se sustentera de " + str(secrets.randbelow(3)+5) + " gorgées."
 
@@ -805,9 +805,9 @@ class Ui_MainWindow(BasicWindow):
 
         for jeu in jeu_controller.list_jeux():
 
-            text = str(jeu.get('exp')).replace('name_joueur', self.list_game_player[
+            text = str(jeu.get('exp')).replace('premier_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
-            text = text.replace('name_joueur2', self.list_game_player[
+            text = text.replace('second_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
             text = text + "\n\n Les nuls boivent " + str(secrets.randbelow(3)+1) + " gorgées pour oublier."
 
@@ -819,9 +819,9 @@ class Ui_MainWindow(BasicWindow):
 
         for virus in virus_controller.list_virus():
 
-            text = str(virus.get('exp')).replace('name_joueur', self.list_game_player[
+            text = str(virus.get('exp')).replace('premier_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
-            text = text.replace('name_joueur2', self.list_game_player[
+            text = text.replace('second_joueur', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
             text = text + "\n\n Tout manquement à ce virus sera puni de " + str(secrets.randbelow(4)+3) + " gorgées."
 
@@ -895,9 +895,9 @@ class Ui_MainWindow(BasicWindow):
         self.stackedWidget.setCurrentIndex(4)
 
         self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
-        contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
+        contenu = str(self.tab_jeu[self.current_round]).replace('premier_joueur', self.list_game_player[
             secrets.randbelow(len(self.list_game_player))])
-        contenu = contenu.replace('name_joueur2', self.list_game_player[
+        contenu = contenu.replace('second_joueur', self.list_game_player[
             secrets.randbelow(len(self.list_game_player))])
         self.labelLECONTENUDUJEU.setText(contenu)
 

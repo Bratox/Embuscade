@@ -24,26 +24,9 @@ def run():
     for p in player_controller.list_player():
         print(p)
 
-    """q = 10
-    while q <= 15:
-        q += 1
-        question_controller2 = QuestionController(database_engine)
-        question_controller2.create_question({'exp': "question2" + str(q)})
+    """for question in question_file.readlines():
+        question_controller.create_question({'exp': question})"""
 
-    for t in question_controller.list_question():
-        print(t)"""
-
-    """list_game_player = ['Bratox', 'Gryff', 'Sirium', 'Nono', 'Kaiser']
-    list_question = []
-
-    for question in question_controller.list_question():
-        list_question.append(str(question.get('exp')).replace('name_joueur', list_game_player[secrets.randbelow(len(list_game_player))]))
-
-    print(list_question)"""
-
-    for question in question_file.readlines():
-        question_controller.create_question({'exp': question})
-        
     """for virus in virus_file.readlines():
         virus_controller.create_virus({'exp' :virus})
     for act_ver in act_ver_file.readlines():
