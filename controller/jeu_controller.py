@@ -12,13 +12,13 @@ class JeuController:
     def list_jeux(self):
         with self._database_engine.new_session() as session:
             jeux = JeuDAO(session).get_all()
-            jeu_data = [jeux.to_dict() for jeu in jeux]
+            jeu_data = [jeu.to_dict() for jeu in jeux]
         return jeu_data
 
     def get_jeu(self,jeu_id):
         with self._database_engine.new_session() as session:
             jeux = JeuDAO(session).get(jeu_id)
-            jeu_data = [jeux.to_dict() for jeu in jeux]
+            jeu_data = [jeu.to_dict() for jeu in jeux]
         return jeu_data
     def create_jeu(self,data):
 
@@ -42,4 +42,4 @@ class JeuController:
         with self._database_engine.new_session() as session:
             jeuDAO = JeuDAO(session)
             jeu = jeuDAO.get(jeu_id)
-            jeuDAO.delete(jeu_id)
+            jeuDAO.delete(jeu)

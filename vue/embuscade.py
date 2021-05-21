@@ -745,13 +745,14 @@ class Ui_MainWindow(BasicWindow):
             self.current_round += 1
             self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
             contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))]) + " ROUND : " + str(self.current_round)
+                secrets.randbelow(len(self.list_game_player))])
             contenu = contenu.replace('name_joueur2', self.list_game_player[
                 secrets.randbelow(len(self.list_game_player))])
             self.labelLECONTENUDUJEU.setText(contenu)
 
     def goToEquipeFromCustom(self):
         self.nbround = int(self.spinBoxNbRound.text())
+        self.list_game_player.append(self.connected_player.get('nickname'))
         self.stackedWidget.setCurrentIndex(5)
         self.list_equip()
 
@@ -881,12 +882,12 @@ class Ui_MainWindow(BasicWindow):
 
     def goToEquipe(self):
         self.stackedWidget.setCurrentIndex(5)
+        self.list_game_player.append(self.connected_player.get('nickname'))
         self.list_equip()
 
     def list_equip(self):
         self.listWidgetEquipeDeJeu.clear()
         index = 1
-        self.list_game_player.append(self.connected_player.get('nickname'))
         print(self.list_game_player)
         for mmb in self.list_game_player:
             self.listWidgetEquipeDeJeu.insertItem(index, mmb)

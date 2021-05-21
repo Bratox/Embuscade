@@ -11,7 +11,7 @@ class GameController:
     def list_game(self):
         with self._database_engine.new_session() as session:
             games = GameDAO(session).get_all()
-            game_data = [games.to_dict() for game in games]
+            game_data = [game.to_dict() for game in games]
         return game_data
 
     def create_game(self,data):
@@ -36,4 +36,4 @@ class GameController:
         with self._database_engine.new_session() as session:
             gameDAO = GameDAO(session)
             game = gameDAO.get(game_id)
-            gameDAO.delete(game_id)
+            gameDAO.delete(game)
