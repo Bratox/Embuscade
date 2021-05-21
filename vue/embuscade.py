@@ -780,17 +780,37 @@ class Ui_MainWindow(BasicWindow):
         virus_controller = VirusController(self._database_engine)
 
         for question in question_controller.list_question():
-            self.list_question.append(str(question.get('exp')).replace('name_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))]))
+
+            text = str(question.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text.replace('name_joueur2', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+
+            if "Qui" in str(question.get('exp')).split(" ")[0]:
+                text = text + " \n\n L'heureux.se élu.e sera gratifié.e de " + str(secrets.randbelow(3)+2)+" gorgées."
+            else:
+                text = text + "\n\n Si la réponse n'est pas bonne, l'inculte prendra "+ str(secrets.randbelow(5)+2)+" gorgées."
+
+            self.list_question.append(text)
 
         for act_ver in act_ver_controller.list_act_vers():
-            self.list_act_ver.append(str(act_ver.get('exp')).replace('name_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))]))
+
+            text = str(act_ver.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text.replace('name_joueur2', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text + "\n\n En cas de refus, la flemmardise et le.la muet.te se sustentera de " + str(secrets.randbelow(3)+5) + " gorgées."
+
+            self.list_act_ver.append(text)
 
         for jeu in jeu_controller.list_jeux():
-            text = str(jeu.get('exp')).replace('name_joueur',
-                                               self.list_game_player[secrets.randbelow(len(self.list_game_player))])
-            text = text.replace('name_joueur2', self.list_game_player[secrets.randbelow(len(self.list_game_player))])
+
+            text = str(jeu.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text.replace('name_joueur2', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text + "\n\n Les nuls boivent " + str(secrets.randbelow(3)+1) + " gorgées pour oublier."
+
             self.list_jeu.append(text)
 
         for embuscade in embuscade_controller.list_embuscades():
@@ -798,8 +818,14 @@ class Ui_MainWindow(BasicWindow):
                 secrets.randbelow(len(self.list_game_player))]))
 
         for virus in virus_controller.list_virus():
-            self.list_virus.append(str(virus.get('exp')).replace('name_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))]))
+
+            text = str(virus.get('exp')).replace('name_joueur', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text.replace('name_joueur2', self.list_game_player[
+                secrets.randbelow(len(self.list_game_player))])
+            text = text + "\n\n Tout manquement à ce virus sera puni de " + str(secrets.randbelow(4)+3) + " gorgées."
+
+            self.list_virus.append(text)
 
         quest_fait = []
         virus_fait = []
