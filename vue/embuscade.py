@@ -508,6 +508,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.labelLECONTENUDUJEU = QtWidgets.QLabel(self.verticalLayoutWidget_4)
         self.labelLECONTENUDUJEU.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelLECONTENUDUJEU.setStyleSheet("font: 12pt")
         self.labelLECONTENUDUJEU.setObjectName("labelLECONTENUDUJEU")
         self.verticalLayout_15.addWidget(self.labelLECONTENUDUJEU)
         self.pushButtonRoundSuivant = QtWidgets.QPushButton(self.pageAffJeu)
