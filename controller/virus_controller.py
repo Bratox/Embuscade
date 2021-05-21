@@ -16,7 +16,7 @@ class VirusController:
         return virus_data
 
     def get_virus(self, virus_id):
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             virus = VirusDAO(session).get(virus_id)
             virus_data = virus.to_dict()
         return virus_data

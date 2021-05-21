@@ -16,7 +16,7 @@ class QuestionController:
         return questions_data
 
     def get_question(self, question_id):
-        with self._database_engine.new_session as session:
+        with self._database_engine.new_session() as session:
             question = QuestionDAO(session).get(question_id)
             question_data = question.to_dict()
         return question_data

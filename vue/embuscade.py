@@ -809,7 +809,7 @@ class Ui_MainWindow(BasicWindow):
         for i in range(self.nbround):
             type = secrets.randbelow(100) + 1
 
-            if (type >= 1) and (type <= 28):
+            if (type >= 1) and (type <= 101):
 
                 num = secrets.randbelow(len(self.list_question))
                 while num in quest_fait:
@@ -818,7 +818,7 @@ class Ui_MainWindow(BasicWindow):
                 self.type_ac.append('Question')
                 self.tab_jeu.append(self.list_question[num])
 
-            elif (type >= 29) and (type <= 56):
+            """elif (type >= 29) and (type <= 56):
 
                 num = secrets.randbelow(len(self.list_act_ver))
                 while num in act_ver_fait:
@@ -849,7 +849,7 @@ class Ui_MainWindow(BasicWindow):
                 while num in embuscade_fait:
                     num = secrets.randbelow(len(self.list_embuscade))
                 self.type_ac.append('Embuscade')
-                self.tab_jeu = self.list_embuscade[num]
+                self.tab_jeu = self.list_embuscade[num]"""
 
             index += 1
 
@@ -862,14 +862,13 @@ class Ui_MainWindow(BasicWindow):
 
         game_data = {'creator_id': self.connected_player.get('id'), 'nbround': self.nbround}
 
-        #TODO Verif create game
-        #self._game_controller.create_game(game_data)
+        self._game_controller.create_game(game_data)
 
         self.stackedWidget.setCurrentIndex(4)
 
         self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
         contenu = str(self.tab_jeu[self.current_round]).replace('name_joueur', self.list_game_player[
-            secrets.randbelow(len(self.list_game_player))]) + " ROUND : " + str(self.current_round)
+            secrets.randbelow(len(self.list_game_player))])
         contenu = contenu.replace('name_joueur2', self.list_game_player[
             secrets.randbelow(len(self.list_game_player))])
         self.labelLECONTENUDUJEU.setText(contenu)
@@ -887,7 +886,8 @@ class Ui_MainWindow(BasicWindow):
     def list_equip(self):
         self.listWidgetEquipeDeJeu.clear()
         index = 1
-        self.listWidgetEquipeDeJeu.insertItem(index, self.connected_player.get('nickname'))
+        self.list_game_player.append(self.connected_player.get('nickname'))
+        print(self.list_game_player)
         for mmb in self.list_game_player:
             self.listWidgetEquipeDeJeu.insertItem(index, mmb)
             index += 1
