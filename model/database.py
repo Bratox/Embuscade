@@ -12,7 +12,7 @@ class DatabaseEngine:
     """
 
     def __init__(self, url='sqlite:///:memory:', verbose=False):
-        self._engine = create_engine(url, echo=verbose)
+        self._engine = create_engine(url, echo=verbose, encoding="utf8")
         self._Session = sessionmaker(bind=self._engine)
 
     def new_session(self):

@@ -771,6 +771,7 @@ class Ui_MainWindow(BasicWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.pushButtonDeletePlayer.setEnabled(False)
         self.pushButtonEquipeFaiteLancerPartieRapide.setEnabled(False)
+        self.labelLECONTENUDUJEU.wordWrap()
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.show()
 
