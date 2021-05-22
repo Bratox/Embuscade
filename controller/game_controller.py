@@ -14,6 +14,12 @@ class GameController:
             game_data = [game.to_dict() for game in games]
         return game_data
 
+    def game_by_creator_id(self, creator_id):
+        with self._database_engine.new_session() as session:
+            games = GameDAO(session).get_game_by_creator_id(creator_id)
+            games_data = [partie.to_dict() for partie in games]
+        return games_data
+
     def create_game(self,data):
 
         try:

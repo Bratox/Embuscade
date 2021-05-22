@@ -35,7 +35,7 @@ def run():
     for p in player_controller.list_player():
         print(p)
 
-    for question in question_file.readlines():
+    """for question in question_file.readlines():
         question_controller.create_question({'exp': question})
     for virus in virus_file.readlines():
         virus_controller.create_virus({'exp' :virus})
@@ -44,7 +44,7 @@ def run():
     for embuscade in embuscade_file.readlines():
         embuscade_controller.create_embuscade({'exp':embuscade})
     for jeu in jeu_file.readlines():
-        jeu_controller.create_jeu({'exp':jeu})
+        jeu_controller.create_jeu({'exp':jeu})"""
 
     app = QApplication(sys.argv)
 

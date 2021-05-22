@@ -9,50 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from vue.window import BasicWindow
-import secrets
-from controller.player_controller import PlayerController
-from controller.question_controller import QuestionController
-from controller.virus_controller import VirusController
-from controller.jeu_controller import JeuController
-from controller.embuscade_controller import EmbuscadeController
-from controller.game_controller import GameController
-from controller.act_ver_controllers import Act_verController
 
 
-class Ui_MainWindow(BasicWindow):
-
-    def __init__(self, player_controller: PlayerController, database_engine, Mwind):
-        self._player_controller = player_controller
-        self._database_engine = database_engine
-
-        self.connected_player = None
-        self.nbround = 20
-
-        self.list_game_player = []
-
-        self.tab_jeu = []
-        self.type_ac = []
-
-        self.act_ind = []
-        self.list_act_ver = []
-        self.list_embuscade = []
-        self.list_jeu = []
-        self.list_question = []
-        self.list_virus = []
-        self.end_virus = []
-
-        self.selected_user = ""
-
-        self._game_controller = GameController(self._database_engine)
-
-        self.current_round = 0
-
-        super().__init__()
-
-        self._MWind = Mwind
-        self.setupUi(self._MWind)
-
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(900, 600)
@@ -81,7 +40,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.labelConnexion = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.labelConnexion.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-                                          "color:rgb(0, 0, 0);")
+"color:rgb(0, 0, 0);")
         self.labelConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.labelConnexion.setObjectName("labelConnexion")
         self.verticalLayout_8.addWidget(self.labelConnexion)
@@ -108,8 +67,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPseudoConnexion.setSizePolicy(sizePolicy)
         self.lineEditPseudoConnexion.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPseudoConnexion.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                   "\n"
-                                                   "")
+"\n"
+"")
         self.lineEditPseudoConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPseudoConnexion.setObjectName("lineEditPseudoConnexion")
         self.horizontalLayout_4.addWidget(self.lineEditPseudoConnexion)
@@ -131,8 +90,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPasswordConnexion.setSizePolicy(sizePolicy)
         self.lineEditPasswordConnexion.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPasswordConnexion.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                     "\n"
-                                                     "")
+"\n"
+"")
         self.lineEditPasswordConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPasswordConnexion.setObjectName("lineEditPasswordConnexion")
         self.horizontalLayout_6.addWidget(self.lineEditPasswordConnexion)
@@ -151,8 +110,8 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonConnexion.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonConnexion.setAutoFillBackground(False)
         self.ButtonConnexion.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                           "\n"
-                                           "")
+"\n"
+"")
         self.ButtonConnexion.setAutoDefault(False)
         self.ButtonConnexion.setDefault(True)
         self.ButtonConnexion.setFlat(False)
@@ -171,8 +130,8 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonInscriptionPageConnexion.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonInscriptionPageConnexion.setAutoFillBackground(False)
         self.ButtonInscriptionPageConnexion.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                          "\n"
-                                                          "")
+"\n"
+"")
         self.ButtonInscriptionPageConnexion.setAutoDefault(False)
         self.ButtonInscriptionPageConnexion.setDefault(True)
         self.ButtonInscriptionPageConnexion.setFlat(False)
@@ -192,7 +151,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.labelEmbuscadeConnexion = QtWidgets.QLabel(self.verticalLayoutWidget_8)
         self.labelEmbuscadeConnexion.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-                                                   "color:rgb(0, 0, 0);")
+"color:rgb(0, 0, 0);")
         self.labelEmbuscadeConnexion.setAlignment(QtCore.Qt.AlignCenter)
         self.labelEmbuscadeConnexion.setObjectName("labelEmbuscadeConnexion")
         self.verticalLayout_9.addWidget(self.labelEmbuscadeConnexion)
@@ -202,9 +161,9 @@ class Ui_MainWindow(BasicWindow):
         self.labelInscription = QtWidgets.QLabel(self.pageInscription)
         self.labelInscription.setGeometry(QtCore.QRect(0, 10, 901, 41))
         self.labelInscription.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-                                            "color: rgb(255, 255, 255);\n"
-                                            "border-color: rgb(0, 0, 0);\n"
-                                            "selection-color: rgb(255, 0, 0);")
+"color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);\n"
+"selection-color: rgb(255, 0, 0);")
         self.labelInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.labelInscription.setObjectName("labelInscription")
         self.verticalLayoutWidget_10 = QtWidgets.QWidget(self.pageInscription)
@@ -217,7 +176,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.labelConnexion_2 = QtWidgets.QLabel(self.verticalLayoutWidget_10)
         self.labelConnexion_2.setStyleSheet("font: 24pt \"MS PGothic\";\n"
-                                            "color:rgb(0, 0, 0);")
+"color:rgb(0, 0, 0);")
         self.labelConnexion_2.setAlignment(QtCore.Qt.AlignCenter)
         self.labelConnexion_2.setObjectName("labelConnexion_2")
         self.verticalLayout_11.addWidget(self.labelConnexion_2)
@@ -242,8 +201,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditNomInscription.setSizePolicy(sizePolicy)
         self.lineEditNomInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditNomInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                  "\n"
-                                                  "")
+"\n"
+"")
         self.lineEditNomInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditNomInscription.setObjectName("lineEditNomInscription")
         self.horizontalLayout_7.addWidget(self.lineEditNomInscription)
@@ -265,8 +224,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPrenomInscription.setSizePolicy(sizePolicy)
         self.lineEditPrenomInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPrenomInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                     "\n"
-                                                     "")
+"\n"
+"")
         self.lineEditPrenomInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPrenomInscription.setObjectName("lineEditPrenomInscription")
         self.horizontalLayout_9.addWidget(self.lineEditPrenomInscription)
@@ -286,8 +245,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPseudoInscription.setSizePolicy(sizePolicy)
         self.lineEditPseudoInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPseudoInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                     "\n"
-                                                     "")
+"\n"
+"")
         self.lineEditPseudoInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPseudoInscription.setObjectName("lineEditPseudoInscription")
         self.horizontalLayout_12.addWidget(self.lineEditPseudoInscription)
@@ -309,8 +268,8 @@ class Ui_MainWindow(BasicWindow):
         self.lineEditPasswordInscription.setSizePolicy(sizePolicy)
         self.lineEditPasswordInscription.setMinimumSize(QtCore.QSize(200, 0))
         self.lineEditPasswordInscription.setStyleSheet("background-color: rgb(255,255,255);\n"
-                                                       "\n"
-                                                       "")
+"\n"
+"")
         self.lineEditPasswordInscription.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditPasswordInscription.setObjectName("lineEditPasswordInscription")
         self.horizontalLayout_14.addWidget(self.lineEditPasswordInscription)
@@ -329,8 +288,8 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonInscriptionPageInscription.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonInscriptionPageInscription.setAutoFillBackground(False)
         self.ButtonInscriptionPageInscription.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                            "\n"
-                                                            "")
+"\n"
+"")
         self.ButtonInscriptionPageInscription.setAutoDefault(False)
         self.ButtonInscriptionPageInscription.setDefault(True)
         self.ButtonInscriptionPageInscription.setFlat(False)
@@ -349,8 +308,8 @@ class Ui_MainWindow(BasicWindow):
         self.ButtonRetourInscription.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ButtonRetourInscription.setAutoFillBackground(False)
         self.ButtonRetourInscription.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                   "\n"
-                                                   "")
+"\n"
+"")
         self.ButtonRetourInscription.setAutoDefault(False)
         self.ButtonRetourInscription.setDefault(True)
         self.ButtonRetourInscription.setFlat(False)
@@ -376,8 +335,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.BoutonPartieRapide = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonPartieRapide.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                              "\n"
-                                              "")
+"\n"
+"")
         self.BoutonPartieRapide.setObjectName("BoutonPartieRapide")
         self.verticalLayout_5.addWidget(self.BoutonPartieRapide)
         self.verticalLayout.addLayout(self.verticalLayout_5)
@@ -386,8 +345,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.BoutonPartieCustom = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonPartieCustom.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                              "\n"
-                                              "")
+"\n"
+"")
         self.BoutonPartieCustom.setObjectName("BoutonPartieCustom")
         self.verticalLayout_6.addWidget(self.BoutonPartieCustom)
         self.verticalLayout.addLayout(self.verticalLayout_6)
@@ -396,8 +355,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.BoutonAPropos = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonAPropos.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                         "\n"
-                                         "")
+"\n"
+"")
         self.BoutonAPropos.setObjectName("BoutonAPropos")
         self.verticalLayout_14.addWidget(self.BoutonAPropos)
         self.verticalLayout.addLayout(self.verticalLayout_14)
@@ -406,8 +365,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_26.setObjectName("verticalLayout_26")
         self.BoutonMenuProfil = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BoutonMenuProfil.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                            "\n"
-                                            "")
+"\n"
+"")
         self.BoutonMenuProfil.setObjectName("BoutonMenuProfil")
         self.verticalLayout_26.addWidget(self.BoutonMenuProfil)
         self.verticalLayout.addLayout(self.verticalLayout_26)
@@ -419,7 +378,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.labelEmbuscadeChoixJeu = QtWidgets.QLabel(self.verticalLayoutWidget_11)
         self.labelEmbuscadeChoixJeu.setStyleSheet("font: 28pt \"MS PGothic\";\n"
-                                                  "color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);")
         self.labelEmbuscadeChoixJeu.setAlignment(QtCore.Qt.AlignCenter)
         self.labelEmbuscadeChoixJeu.setObjectName("labelEmbuscadeChoixJeu")
         self.verticalLayout_13.addWidget(self.labelEmbuscadeChoixJeu)
@@ -435,7 +394,7 @@ class Ui_MainWindow(BasicWindow):
         self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label_2.setStyleSheet("font: 28pt \"MS PGothic\";\n"
-                                   "color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_4.addWidget(self.label_2)
@@ -474,14 +433,14 @@ class Ui_MainWindow(BasicWindow):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.comboBoxTypeQuestion)
         self.pushButtonAjouterQuestion = QtWidgets.QPushButton(self.verticalLayoutWidget_14)
         self.pushButtonAjouterQuestion.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                     "\n"
-                                                     "")
+"\n"
+"")
         self.pushButtonAjouterQuestion.setObjectName("pushButtonAjouterQuestion")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.pushButtonAjouterQuestion)
         self.lineEditAjoutQuestion = QtWidgets.QLineEdit(self.verticalLayoutWidget_14)
         self.lineEditAjoutQuestion.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                                 "")
-        self.lineEditAjoutQuestion.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+"")
+        self.lineEditAjoutQuestion.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lineEditAjoutQuestion.setObjectName("lineEditAjoutQuestion")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.lineEditAjoutQuestion)
         self.verticalLayout_21.addLayout(self.formLayout)
@@ -493,8 +452,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_22.setObjectName("verticalLayout_22")
         self.pushButtonLancerPartieCustom = QtWidgets.QPushButton(self.verticalLayoutWidget_15)
         self.pushButtonLancerPartieCustom.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                        "\n"
-                                                        "")
+"\n"
+"")
         self.pushButtonLancerPartieCustom.setObjectName("pushButtonLancerPartieCustom")
         self.verticalLayout_22.addWidget(self.pushButtonLancerPartieCustom)
         self.stackedWidget.addWidget(self.pagePartieCustom)
@@ -543,7 +502,7 @@ class Ui_MainWindow(BasicWindow):
         self.labelEquipe.setObjectName("labelEquipe")
         self.verticalLayout_16.addWidget(self.labelEquipe)
         self.verticalLayoutWidget_5 = QtWidgets.QWidget(self.pageEquipe)
-        self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(160, 110, 551, 111))
+        self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(170, 140, 551, 108))
         self.verticalLayoutWidget_5.setObjectName("verticalLayoutWidget_5")
         self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
@@ -555,7 +514,7 @@ class Ui_MainWindow(BasicWindow):
         self.horizontalLayout.addWidget(self.labelNomDuJoueur)
         self.lineEditAjoutJoueur = QtWidgets.QLineEdit(self.verticalLayoutWidget_5)
         self.lineEditAjoutJoueur.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                               "")
+"")
         self.lineEditAjoutJoueur.setAlignment(QtCore.Qt.AlignCenter)
         self.lineEditAjoutJoueur.setObjectName("lineEditAjoutJoueur")
         self.horizontalLayout.addWidget(self.lineEditAjoutJoueur)
@@ -567,8 +526,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_17.addWidget(self.labelRougeEquipeAjoutJoueur)
         self.pushButtonAjoutJoueur = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
         self.pushButtonAjoutJoueur.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                 "\n"
-                                                 "")
+"\n"
+"")
         self.pushButtonAjoutJoueur.setObjectName("pushButtonAjoutJoueur")
         self.verticalLayout_17.addWidget(self.pushButtonAjoutJoueur)
         self.pushButtonDeletePlayer = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
@@ -576,18 +535,22 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonDeletePlayer.setObjectName("pushButtonDeletePlayer")
         self.verticalLayout_17.addWidget(self.pushButtonDeletePlayer)
         self.verticalLayoutWidget_24 = QtWidgets.QWidget(self.pageEquipe)
-        self.verticalLayoutWidget_24.setGeometry(QtCore.QRect(180, 240, 501, 301))
+        self.verticalLayoutWidget_24.setGeometry(QtCore.QRect(180, 260, 531, 281))
         self.verticalLayoutWidget_24.setObjectName("verticalLayoutWidget_24")
         self.verticalLayout_34 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_24)
         self.verticalLayout_34.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_34.setObjectName("verticalLayout_34")
         self.listWidgetEquipeDeJeu = QtWidgets.QListWidget(self.verticalLayoutWidget_24)
         self.listWidgetEquipeDeJeu.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listWidgetEquipeDeJeu.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.listWidgetEquipeDeJeu.setResizeMode(QtWidgets.QListView.Adjust)
+        self.listWidgetEquipeDeJeu.setUniformItemSizes(True)
+        self.listWidgetEquipeDeJeu.setSelectionRectVisible(True)
         self.listWidgetEquipeDeJeu.setObjectName("listWidgetEquipeDeJeu")
         self.verticalLayout_34.addWidget(self.listWidgetEquipeDeJeu)
         self.pushButtonEquipeFaiteLancerPartieRapide = QtWidgets.QPushButton(self.verticalLayoutWidget_24)
         self.pushButtonEquipeFaiteLancerPartieRapide.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                                   "")
+"")
         self.pushButtonEquipeFaiteLancerPartieRapide.setObjectName("pushButtonEquipeFaiteLancerPartieRapide")
         self.verticalLayout_34.addWidget(self.pushButtonEquipeFaiteLancerPartieRapide)
         self.stackedWidget.addWidget(self.pageEquipe)
@@ -625,8 +588,8 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_20.setObjectName("verticalLayout_20")
         self.pushButtonRetourversMenu = QtWidgets.QPushButton(self.verticalLayoutWidget_13)
         self.pushButtonRetourversMenu.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                    "\n"
-                                                    "")
+"\n"
+"")
         self.pushButtonRetourversMenu.setObjectName("pushButtonRetourversMenu")
         self.verticalLayout_20.addWidget(self.pushButtonRetourversMenu)
         self.stackedWidget.addWidget(self.pageAPropos)
@@ -645,8 +608,8 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonFinRetourMenu = QtWidgets.QPushButton(self.pageFIN)
         self.pushButtonFinRetourMenu.setGeometry(QtCore.QRect(320, 440, 251, 61))
         self.pushButtonFinRetourMenu.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                   "\n"
-                                                   "")
+"\n"
+"")
         self.pushButtonFinRetourMenu.setObjectName("pushButtonFinRetourMenu")
         self.verticalLayoutWidget_17 = QtWidgets.QWidget(self.pageFIN)
         self.verticalLayoutWidget_17.setGeometry(QtCore.QRect(0, 190, 901, 80))
@@ -656,7 +619,7 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_24.setObjectName("verticalLayout_24")
         self.labelMercijouelol = QtWidgets.QLabel(self.verticalLayoutWidget_17)
         self.labelMercijouelol.setStyleSheet("font: 22pt \"Segoe Script\";\n"
-                                             "font: 24pt \"Gill Sans MT\";")
+"font: 24pt \"Gill Sans MT\";")
         self.labelMercijouelol.setObjectName("labelMercijouelol")
         self.verticalLayout_24.addWidget(self.labelMercijouelol, 0, QtCore.Qt.AlignHCenter)
         self.stackedWidget.addWidget(self.pageFIN)
@@ -675,8 +638,8 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonHistoriqueParties = QtWidgets.QPushButton(self.pageProfil)
         self.pushButtonHistoriqueParties.setGeometry(QtCore.QRect(70, 500, 251, 61))
         self.pushButtonHistoriqueParties.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                       "\n"
-                                                       "")
+"\n"
+"")
         self.pushButtonHistoriqueParties.setObjectName("pushButtonHistoriqueParties")
         self.verticalLayoutWidget_19 = QtWidgets.QWidget(self.pageProfil)
         self.verticalLayoutWidget_19.setGeometry(QtCore.QRect(10, 110, 881, 381))
@@ -690,17 +653,17 @@ class Ui_MainWindow(BasicWindow):
         self.verticalLayout_28.setObjectName("verticalLayout_28")
         self.labelProfilNom = QtWidgets.QLabel(self.verticalLayoutWidget_19)
         self.labelProfilNom.setStyleSheet("font: 16pt \"Segoe UI\";")
-        self.labelProfilNom.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.labelProfilNom.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.labelProfilNom.setObjectName("labelProfilNom")
         self.verticalLayout_28.addWidget(self.labelProfilNom)
         self.labelProfilPrenom = QtWidgets.QLabel(self.verticalLayoutWidget_19)
         self.labelProfilPrenom.setStyleSheet("font: 16pt \"Segoe UI\";")
-        self.labelProfilPrenom.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.labelProfilPrenom.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.labelProfilPrenom.setObjectName("labelProfilPrenom")
         self.verticalLayout_28.addWidget(self.labelProfilPrenom)
         self.labelProfilPseudo = QtWidgets.QLabel(self.verticalLayoutWidget_19)
         self.labelProfilPseudo.setStyleSheet("font: 16pt \"Segoe UI\";")
-        self.labelProfilPseudo.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.labelProfilPseudo.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.labelProfilPseudo.setObjectName("labelProfilPseudo")
         self.verticalLayout_28.addWidget(self.labelProfilPseudo)
         self.horizontalLayout_16.addLayout(self.verticalLayout_28)
@@ -723,8 +686,8 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonProfilRetourMenu = QtWidgets.QPushButton(self.pageProfil)
         self.pushButtonProfilRetourMenu.setGeometry(QtCore.QRect(530, 500, 251, 61))
         self.pushButtonProfilRetourMenu.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                      "\n"
-                                                      "")
+"\n"
+"")
         self.pushButtonProfilRetourMenu.setObjectName("pushButtonProfilRetourMenu")
         self.stackedWidget.addWidget(self.pageProfil)
         self.pageHistoriquePartie = QtWidgets.QWidget()
@@ -740,49 +703,46 @@ class Ui_MainWindow(BasicWindow):
         self.labelTitreProfil_2.setObjectName("labelTitreProfil_2")
         self.verticalLayout_31.addWidget(self.labelTitreProfil_2, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayoutWidget_23 = QtWidgets.QWidget(self.pageHistoriquePartie)
-        self.verticalLayoutWidget_23.setGeometry(QtCore.QRect(280, 100, 351, 421))
+        self.verticalLayoutWidget_23.setGeometry(QtCore.QRect(270, 110, 371, 421))
         self.verticalLayoutWidget_23.setObjectName("verticalLayoutWidget_23")
         self.verticalLayout_32 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_23)
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_32.setObjectName("verticalLayout_32")
-        self.listWidgetHistorique = QtWidgets.QListWidget(self.verticalLayoutWidget_23)
-        self.listWidgetHistorique.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.listWidgetHistorique.setItemAlignment(QtCore.Qt.AlignHCenter)
-        self.listWidgetHistorique.setObjectName("listWidgetHistorique")
-        self.verticalLayout_32.addWidget(self.listWidgetHistorique)
+        self.listWidgetHistoriqueParties = QtWidgets.QListWidget(self.verticalLayoutWidget_23)
+        self.listWidgetHistoriqueParties.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listWidgetHistoriqueParties.setItemAlignment(QtCore.Qt.AlignHCenter)
+        self.listWidgetHistoriqueParties.setObjectName("listWidgetHistoriqueParties")
+        self.verticalLayout_32.addWidget(self.listWidgetHistoriqueParties)
         self.pushButtonHistoriqueRetourProfil = QtWidgets.QPushButton(self.verticalLayoutWidget_23)
         self.pushButtonHistoriqueRetourProfil.setStyleSheet("background-color: rgb(255,133,51);\n"
-                                                            "")
+"")
         self.pushButtonHistoriqueRetourProfil.setObjectName("pushButtonHistoriqueRetourProfil")
         self.verticalLayout_32.addWidget(self.pushButtonHistoriqueRetourProfil)
         self.stackedWidget.addWidget(self.pageHistoriquePartie)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setEnabled(True)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.actionOui = QtWidgets.QAction(MainWindow)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/rec/Photos/(m=e-yaaGqaa)(mh=3u682Et6NxDM2jbp)original_121743021.jpg"),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/rec/Photos/(m=e-yaaGqaa)(mh=3u682Et6NxDM2jbp)original_121743021.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionOui.setIcon(icon)
         self.actionOui.setObjectName("actionOui")
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
-        self.pushButtonDeletePlayer.setEnabled(False)
-        self.pushButtonEquipeFaiteLancerPartieRapide.setEnabled(False)
+        self.stackedWidget.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        MainWindow.show()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Embuscade"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.labelConnexion.setText(_translate("MainWindow", "Connexion"))
         self.labelPseudoConnexion.setText(_translate("MainWindow", "Pseudo"))
         self.labelPasswordConnexion.setText(_translate("MainWindow", "Mot de passe"))
         self.ButtonConnexion.setText(_translate("MainWindow", "Connexion"))
         self.ButtonInscriptionPageConnexion.setText(_translate("MainWindow", "Inscription"))
-        self.labelConnexionRouge.setText(_translate("MainWindow", ""))
+        self.labelConnexionRouge.setText(_translate("MainWindow", "."))
         self.labelEmbuscadeConnexion.setText(_translate("MainWindow", "Embuscade"))
         self.labelInscription.setText(_translate("MainWindow", "Embuscade"))
         self.labelConnexion_2.setText(_translate("MainWindow", "Inscription"))
@@ -792,7 +752,7 @@ class Ui_MainWindow(BasicWindow):
         self.labelPasswordInscription_4.setText(_translate("MainWindow", "Mot de passe"))
         self.ButtonInscriptionPageInscription.setText(_translate("MainWindow", "Inscription"))
         self.ButtonRetourInscription.setText(_translate("MainWindow", "Retour"))
-        self.labelInscriptionRouge.setText(_translate("MainWindow", ""))
+        self.labelInscriptionRouge.setText(_translate("MainWindow", "."))
         self.BoutonPartieRapide.setText(_translate("MainWindow", "Partie rapide"))
         self.BoutonPartieCustom.setText(_translate("MainWindow", "Partie custom"))
         self.BoutonAPropos.setText(_translate("MainWindow", "A propos"))
@@ -813,12 +773,12 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonRoundSuivant.setText(_translate("MainWindow", "Round suivant"))
         self.labelEquipe.setText(_translate("MainWindow", "Equipe"))
         self.labelNomDuJoueur.setText(_translate("MainWindow", "Nom du joueur"))
-        self.labelRougeEquipeAjoutJoueur.setText(_translate("MainWindow", ""))
+        self.labelRougeEquipeAjoutJoueur.setText(_translate("MainWindow", "."))
         self.pushButtonAjoutJoueur.setText(_translate("MainWindow", "Ajouter joueur"))
         self.pushButtonDeletePlayer.setText(_translate("MainWindow", "Enlever joueur sélectionné"))
-        self.pushButtonEquipeFaiteLancerPartieRapide.setText(
-            _translate("MainWindow", "L\'équipe est faite ! (Lancer le jeu)"))
+        self.pushButtonEquipeFaiteLancerPartieRapide.setText(_translate("MainWindow", "L\'équipe est faite ! (Lancer le jeu)"))
         self.labelAProposTitre.setText(_translate("MainWindow", "A propos"))
+        self.labelAProposContenu.setText(_translate("MainWindow", "Ici on met le texte de a propos, coucou Cemo"))
         self.pushButtonRetourversMenu.setText(_translate("MainWindow", "Retour"))
         self.labelTitreFin.setText(_translate("MainWindow", "FIN"))
         self.pushButtonFinRetourMenu.setText(_translate("MainWindow", "Retour menu"))
@@ -836,371 +796,12 @@ class Ui_MainWindow(BasicWindow):
         self.pushButtonHistoriqueRetourProfil.setText(_translate("MainWindow", "Retour vers profil"))
         self.actionOui.setText(_translate("MainWindow", "Oui"))
 
-        self.labelAProposContenu.setText(
-            _translate("MainWindow", "Ce jeu est fait pour le projet GLPOO à l'ESIEA de Laval, il a été réaliser par \n"
-                                     "Cem GUNGOR, Léo Rabaud et Léo Bendref \n"
-                                     "Voici comment fonctionne le jeu :\n"
-                                     "Vous pouvez jouer à deux types de partie, une partie rapide dans lequel vous inscrivez les joueurs qui\n"
-                                     "vont jouer avec vous et une partie custom dans lequel vous pouvez choisir le nombre de round que vous\n"
-                                     "voulez jouer, vous pouvez ajouter des question qui s'afficherons dans le jeu et par la suite vous gérer\n"
-                                     "les joueurs avec qui vous jouerez\n\n"
-                                     "Vous pouvez créer des question qui prend des joueurs au hasard du groupe avec cette syntaxe : \n"
-                                     "premier_joueur : ce texte sera remplacé par un joueur aléatoire de votre groupe\n"
-                                     "second_joueur : ce texte sera remplacé par un joueur aléatoire de votre groupe\n"
-                                     "Ce type de syntaxe vous permettra de faire tout type d'activité avec le nom de deux joueurs\n"
-                                     "Vous pouvez aussi inscrire seulement premier_joueur ou second_joueur pour afficher seulement un\n"
-                                     "joueur dans l'activité"))
 
-        self.ButtonInscriptionPageInscription.clicked.connect(self.registerCheck)
-        self.ButtonInscriptionPageConnexion.clicked.connect(self.goToRegister)
-        self.ButtonConnexion.clicked.connect(self.connexionCheck)
-        self.ButtonRetourInscription.clicked.connect(self.goToConnexion)
-        self.BoutonPartieCustom.clicked.connect(self.goToPartieCustom)
-        self.pushButtonLancerPartieCustom.clicked.connect(self.goToEquipeFromCustom)
-        self.pushButtonEquipeFaiteLancerPartieRapide.clicked.connect(self.goToAffJeu)
-        self.BoutonPartieRapide.clicked.connect(self.goToEquipe)
-        self.BoutonAPropos.clicked.connect(self.goToAPropos)
-        self.pushButtonRetourversMenu.clicked.connect(self.goToMenu)
-        self.pushButtonAjoutJoueur.clicked.connect(self.addJoueur)
-        self.pushButtonAjouterQuestion.clicked.connect(self.addQuestion)
-        self.pushButtonRoundSuivant.clicked.connect(self.nextRound)
-        self.pushButtonFinRetourMenu.clicked.connect(self.resetGame)
-        self.BoutonMenuProfil.clicked.connect(self.goToProfile)
-        self.pushButtonHistoriqueParties.clicked.connect(self.goToHistoriqueGame)
-        self.pushButtonProfilRetourMenu.clicked.connect(self.goToMenu)
-        self.pushButtonHistoriqueRetourProfil.clicked.connect(self.goToProfile)
-        self.pushButtonDeletePlayer.clicked.connect(self.deletePlayerGame)
-
-    def goToRegister(self):
-        self.stackedWidget.setCurrentIndex(1)
-
-    def goToMenu(self):
-        self.stackedWidget.setCurrentIndex(2)
-
-    def goToPartieCustom(self):
-
-        self.stackedWidget.setCurrentIndex(3)
-
-    def goToProfile(self):
-        self.labelProfilMettreNom.setText(str(self.connected_player.get('name')))
-        self.labelProfilMettrePseudo.setText(str(self.connected_player.get('nickname')))
-        self.labelprofilMettrePrenom.setText(str(self.connected_player.get('surname')))
-        self.stackedWidget.setCurrentIndex(8)
-
-    def goToHistoriqueGame(self):
-        self.stackedWidget.setCurrentIndex(9)
-        self.listWidgetHistorique.clear()
-        tab_partie = self._game_controller.game_by_creator_id(self.connected_player.get('id'))
-        print(tab_partie)
-        index = 0
-        for pt in tab_partie:
-            self.listWidgetHistorique.insertItem(index,
-                                                 "\t* " + str(index + 1) + "\t Rounds : " + str(pt.get('nbround')))
-            index += 1
-
-    def list_equip(self):
-        self.listWidgetEquipeDeJeu.clear()
-        index = 1
-        for mmb in self.list_game_player:
-            self.listWidgetEquipeDeJeu.insertItem(index, mmb)
-            index += 1
-
-        if len(self.list_game_player) > 1:
-            self.pushButtonEquipeFaiteLancerPartieRapide.setEnabled(True)
-        else:
-            self.pushButtonEquipeFaiteLancerPartieRapide.setEnabled(False)
-
-        self.listWidgetEquipeDeJeu.clicked.connect(self.listPlayerClicked)
-
-    def goToEquipe(self):
-        self.stackedWidget.setCurrentIndex(5)
-        self.listWidgetEquipeDeJeu.clear()
-        self.list_game_player.append(self.connected_player.get('nickname'))
-        self.labelRougeEquipeAjoutJoueur.setText("")
-        self.list_equip()
-
-    def listPlayerClicked(self):
-        if len(self.list_game_player) > 1:
-            item = self.listWidgetEquipeDeJeu.currentItem()
-            self.selected_user = item.text()
-            self.pushButtonDeletePlayer.setEnabled(True)
-
-    def deletePlayerGame(self):
-        if self.selected_user != "":
-            index = 0
-            for u in self.list_game_player:
-                if str(u) == str(self.selected_user):
-                    self.list_game_player.pop(index)
-                    break
-                index += 1
-
-            self.selected_user = ""
-            self.pushButtonDeletePlayer.setEnabled(False)
-        self.list_equip()
-
-    def resetGame(self):
-        self.stackedWidget.setCurrentIndex(2)
-
-        self.tab_jeu.clear()
-        self.type_ac.clear()
-        self.current_round = 0
-        self.nbround = 20
-        self.list_game_player.clear()
-        self.list_jeu.clear()
-        self.list_embuscade.clear()
-        self.list_act_ver.clear()
-        self.list_virus.clear()
-        self.list_question.clear()
-
-    def nextRound(self):
-
-        if self.current_round == (len(self.tab_jeu) - 1):
-            self.stackedWidget.setCurrentIndex(7)
-        else:
-            self.current_round += 1
-            self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
-            contenu = str(self.tab_jeu[self.current_round]).replace('premier_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))])
-            contenu = contenu.replace('second_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))])
-            self.labelLECONTENUDUJEU.setText(contenu)
-
-    def goToEquipeFromCustom(self):
-        self.nbround = int(self.spinBoxNbRound.text())
-        self.list_game_player.append(self.connected_player.get('nickname'))
-        self.stackedWidget.setCurrentIndex(5)
-        self.labelRougeEquipeAjoutJoueur.setText("")
-        self.list_equip()
-
-    def addQuestion(self):
-        ind = self.comboBoxTypeQuestion.currentText()
-
-        if ind == 'Question':
-            self.list_question.append(self.lineEditAjoutQuestion.text().strip())
-        elif ind == 'Jeu':
-            self.list_jeu.append(self.lineEditAjoutQuestion.text().strip())
-        elif ind == 'Virus':
-            self.list_virus.append(self.lineEditAjoutQuestion.text().strip())
-        elif ind == 'Action/Verite':
-            self.list_act_ver.append(self.lineEditAjoutQuestion.text().strip())
-
-        self.lineEditAjoutQuestion.setText("")
-
-    def goToAffJeu(self):
-
-        question_controller = QuestionController(self._database_engine)
-        act_ver_controller = Act_verController(self._database_engine)
-        embuscade_controller = EmbuscadeController(self._database_engine)
-        jeu_controller = JeuController(self._database_engine)
-        virus_controller = VirusController(self._database_engine)
-
-        for question in question_controller.list_question():
-            j1 = secrets.randbelow(len(self.list_game_player))
-            j2 = secrets.randbelow(len(self.list_game_player))
-
-            if j2 == j1:
-                while j2 == j1:
-                    j2 = secrets.randbelow(len(self.list_game_player))
-
-            text = str(question.get('exp')).replace('premier_joueur', self.list_game_player[j1])
-            text = text.replace('second_joueur', self.list_game_player[j2])
-
-            if "Qui" in str(question.get('exp')).split(" ")[0]:
-                text = text + " \n\n L'heureux.se élu.e sera gratifié.e de " + str(
-                    secrets.randbelow(3) + 2) + " gorgées."
-            else:
-                text = text + "\n\n Si la réponse n'est pas bonne, l'inculte prendra " + str(
-                    secrets.randbelow(5) + 2) + " gorgées."
-
-            self.list_question.append(text)
-
-        for act_ver in act_ver_controller.list_act_vers():
-
-            j1 = secrets.randbelow(len(self.list_game_player))
-            j2 = secrets.randbelow(len(self.list_game_player))
-
-            if j2 == j1:
-                while j2 == j1:
-                    j2 = secrets.randbelow(len(self.list_game_player))
-
-            text = str(act_ver.get('exp')).replace('premier_joueur', self.list_game_player[j1])
-            text = text.replace('second_joueur', self.list_game_player[j2])
-            text = text + "\n\n En cas de refus, la flemmardise et le.la muet.te se sustentera de " + str(
-                secrets.randbelow(3) + 5) + " gorgées."
-
-            self.list_act_ver.append(text)
-
-        for jeu in jeu_controller.list_jeux():
-
-            j1 = secrets.randbelow(len(self.list_game_player))
-            j2 = secrets.randbelow(len(self.list_game_player))
-
-            if j2 == j1:
-                while j2 == j1:
-                    j2 = secrets.randbelow(len(self.list_game_player))
-
-            text = str(jeu.get('exp')).replace('premier_joueur', self.list_game_player[j1])
-            text = text.replace('second_joueur', self.list_game_player[j2])
-            text = text + "\n\n Les nuls boivent " + str(secrets.randbelow(3) + 1) + " gorgées pour oublier."
-
-            self.list_jeu.append(text)
-
-        for embuscade in embuscade_controller.list_embuscades():
-
-            self.list_embuscade.append(str(embuscade.get('exp')).replace('name_joueur', self.list_game_player[
-                secrets.randbelow(len(self.list_game_player))]))
-
-        for virus in virus_controller.list_virus():
-
-            j1 = secrets.randbelow(len(self.list_game_player))
-            j2 = secrets.randbelow(len(self.list_game_player))
-
-            if j2 == j1:
-                while j2 == j1:
-                    j2 = secrets.randbelow(len(self.list_game_player))
-
-            text = str(virus.get('exp')).replace('premier_joueur', self.list_game_player[j1])
-            text = text.replace('second_joueur', self.list_game_player[j1])
-            text = text + "\n\n Tout manquement à ce virus sera puni de " + str(secrets.randbelow(4) + 3) + " gorgées."
-
-            self.list_virus.append(text)
-
-        quest_fait = []
-        virus_fait = []
-        act_ver_fait = []
-        jeu_fait = []
-        embuscade_fait = []
-
-        index = 0
-        for i in range(self.nbround):
-            type = secrets.randbelow(100) + 1
-
-            if (type >= 1) and (type <= 28):
-
-                num = secrets.randbelow(len(self.list_question))
-                while num in quest_fait:
-                    num = secrets.randbelow(len(self.list_question))
-                quest_fait.append(num)
-                self.type_ac.append('Question')
-                self.tab_jeu.append(self.list_question[num])
-
-            elif (type >= 29) and (type <= 56):
-
-                num = secrets.randbelow(len(self.list_act_ver))
-                while num in act_ver_fait:
-                    num = secrets.randbelow(len(self.list_act_ver))
-                self.type_ac.append('Action/Verite')
-                self.tab_jeu.append(self.list_act_ver[num])
-
-            elif (type >= 57) and (type <= 84):
-
-                num = secrets.randbelow(len(self.list_jeu))
-                while num in jeu_fait:
-                    num = secrets.randbelow(len(self.list_jeu))
-                self.type_ac.append('Jeu')
-                self.tab_jeu.append(self.list_jeu[num])
-
-            elif (type >= 85) and (type <= 95):
-
-                num = secrets.randbelow(len(self.list_virus))
-                while num in virus_fait:
-                    num = secrets.randbelow(len(self.list_virus))
-                self.type_ac.append('Virus')
-                self.tab_jeu.append(self.list_virus[num])
-                self.end_virus.append(index + secrets.randbelow(10) + 3)
-
-            elif (type >= 96) and (type <= 101):
-
-                num = secrets.randbelow(len(self.list_embuscade))
-                while num in embuscade_fait:
-                    num = secrets.randbelow(len(self.list_embuscade))
-                self.type_ac.append('Embuscade')
-                self.tab_jeu.append(self.list_embuscade[num])
-
-            index += 1
-
-        for end in self.end_virus:
-            self.tab_jeu.insert(end, "Fin du Virus, vous êtes guéris")
-            self.type_ac.insert(end, "Virus")
-
-        print(self.tab_jeu)
-        print(len(self.tab_jeu))
-
-        game_data = {'creator_id': self.connected_player.get('id'), 'nbround': self.nbround}
-
-        self._game_controller.create_game(game_data)
-
-        self.stackedWidget.setCurrentIndex(4)
-
-        self.labelLETYPEDEJEU.setText(self.type_ac[self.current_round])
-        contenu = str(self.tab_jeu[self.current_round]).replace('premier_joueur', self.list_game_player[
-            secrets.randbelow(len(self.list_game_player))])
-        contenu = contenu.replace('second_joueur', self.list_game_player[
-            secrets.randbelow(len(self.list_game_player))])
-        self.labelLECONTENUDUJEU.setText(contenu)
-
-    def goToAPropos(self):
-        self.stackedWidget.setCurrentIndex(6)
-
-    def goToConnexion(self):
-        self.stackedWidget.setCurrentIndex(0)
-
-    def addJoueur(self):
-        if self.lineEditAjoutJoueur.text().strip():
-            self.list_game_player.append(self.lineEditAjoutJoueur.text().strip())
-            self.lineEditAjoutJoueur.setText("")
-            self.labelRougeEquipeAjoutJoueur.setText("")
-            self.list_equip()
-        else:
-            self.labelRougeEquipeAjoutJoueur.setText("Veuillez renseigner un joueur dans le champ avant d'ajouter")
-
-    def registerCheck(self):
-        if (self.lineEditNomInscription.text().strip()) and (self.lineEditPrenomInscription.text().strip()) and (
-                self.lineEditPasswordInscription.text().strip()) and (self.lineEditPseudoInscription.text().strip()):
-
-            self.labelInscriptionRouge.setText("")
-            data_player = self._player_controller.get_player_by_nick(self.lineEditPseudoInscription.text().strip())
-
-            if data_player:
-                self.labelInscriptionRouge.setText("Ce nom d'utilisateur est existant")
-
-            else:
-
-                data = {'name': self.lineEditNomInscription.text().strip(),
-                        'surname': self.lineEditPrenomInscription.text().strip(),
-                        'nickname': self.lineEditPseudoInscription.text().strip(),
-                        'password': self.lineEditPasswordInscription.text().strip()}
-                self._player_controller.create_player(data)
-                self.lineEditNomInscription.setText("")
-                self.lineEditPrenomInscription.setText("")
-                self.lineEditPseudoInscription.setText("")
-                self.lineEditPasswordInscription.setText("")
-                self.goToConnexion()
-
-        else:
-            self.labelInscriptionRouge.setText("Veuillez remplir tout les champs")
-
-    def connexionCheck(self):
-        if (self.lineEditPseudoConnexion.text().strip()) and (self.lineEditPasswordConnexion.text().strip()):
-            self.labelConnexionRouge.setText("")
-
-            data_player = self._player_controller.get_player_by_nick(self.lineEditPseudoConnexion.text().strip())
-            if data_player:
-
-                if self.lineEditPasswordConnexion.text().strip() == data_player.get("password"):
-
-                    self.connected_player = self._player_controller.get_player_by_nick(
-                        self.lineEditPseudoConnexion.text().strip())
-                    self.lineEditPseudoConnexion.setText("")
-                    self.lineEditPasswordConnexion.setText("")
-                    self.goToMenu()
-
-                else:
-                    self.labelConnexionRouge.setText("Votre mot de passe est inccorect")
-
-            else:
-                self.labelConnexionRouge.setText("Une ou plusieurs informations sont inccorects")
-
-        else:
-            self.labelConnexionRouge.setText(
-                "Veuillez remplir tout les champs, si vous n'etes pas inscrit veuillez vous inscrire")
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
