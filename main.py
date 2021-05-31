@@ -26,11 +26,11 @@ def run():
     act_ver_controller = Act_verController(database_engine)
     jeu_controller = JeuController(database_engine)
 
-    question_file = open("question.txt", "r")
-    virus_file = open("virus.txt", "r")
-    embuscade_file = open("embuscade.txt", "r")
-    act_ver_file = open("act_ver.txt", "r")
-    jeu_file = open("jeu.txt", "r")
+    question_file = open("question.txt", "r", encoding="utf-8")
+    virus_file = open("virus.txt", "r", encoding="utf-8")
+    embuscade_file = open("embuscade.txt", "r", encoding="utf-8")
+    act_ver_file = open("act_ver.txt", "r", encoding="utf-8")
+    jeu_file = open("jeu.txt", "r", encoding="utf-8")
 
     for p in player_controller.list_player():
         print(p)

@@ -771,7 +771,7 @@ class Ui_MainWindow(BasicWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.pushButtonDeletePlayer.setEnabled(False)
         self.pushButtonEquipeFaiteLancerPartieRapide.setEnabled(False)
-        self.labelLECONTENUDUJEU.wordWrap()
+        self.labelLECONTENUDUJEU.setWordWrap(True)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.show()
 
@@ -1123,6 +1123,16 @@ class Ui_MainWindow(BasicWindow):
         for end in self.end_virus:
             self.tab_jeu.insert(end, "Fin du Virus, vous êtes guéris")
             self.type_ac.insert(end, "Virus")
+
+        if "Embuscade" not in self.type_ac:
+            ind = secrets.randbelow(self.nbround)
+            while self.type_ac[ind] == "Virus":
+                ind = secrets.randbelow(self.nbround)
+            self.type_ac[ind] = "Embuscade"
+            num = secrets.randbelow(len(self.list_embuscade))
+            while num in embuscade_fait:
+                num = secrets.randbelow(len(self.list_embuscade))
+            self.tab_jeu[ind] = self.list_embuscade[num]
 
         print(self.tab_jeu)
         print(len(self.tab_jeu))
